@@ -1,0 +1,9 @@
+
+Vazirmatn typeface notice
+Family: Vazirmatn Variable
+Project: https://github.com/rastikerdar/vazirmatn
+Source release: v33.003
+Bundled file: Vazirmatn-Variable.woff2
+License: SIL Open Font License 1.1 (OFL-1.1).
+License text: OFL.txt
+The font is bundled locally in this project and served from the font directory. No external CDN request is required.
