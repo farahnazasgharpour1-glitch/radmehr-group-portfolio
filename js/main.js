@@ -97,16 +97,137 @@ projectCards.forEach((card) => {
   });
 });
 
-// The gallery remains native horizontal scrolling. Only arrow keys are enhanced;
-// vertical wheel input is never cancelled, so the document keeps scrolling naturally.
-const galleryViewport = document.querySelector(".project-showcase__viewport");
-galleryViewport?.addEventListener("keydown", (event) => {
-  if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-  event.preventDefault();
-  const direction = event.key === "ArrowRight" ? 1 : -1;
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  galleryViewport.scrollBy({ left: direction * Math.max(180, galleryViewport.clientWidth * 0.65), behavior: reduceMotion ? "auto" : "smooth" });
-});
+// Native horizontal gallery with automatic progression and clear pause controls.
+(() => {
+  const viewport = document.querySelector(".project-showcase__viewport");
+  if (!viewport) return;
+
+  const track = viewport.querySelector(".project-showcase__track");
+  const panels = track ? Array.from(track.querySelectorAll(".showcase-panel")) : [];
+  const toggle = document.querySelector(".project-showcase__autoplay-toggle");
+  if (panels.length < 2) {
+    if (toggle) toggle.hidden = true;
+    return;
+  }
+
+  const motionQuery = window.matchMedia
+    ? window.matchMedia("(prefers-reduced-motion: reduce)")
+    : null;
+  const reducedMotion = !!(motionQuery && motionQuery.matches);
+  let userPaused = reducedMotion;
+  let pointerPaused = false;
+  let focusPaused = false;
+  let userStartedMotion = false;
+
+  function isPaused() {
+    return userPaused || pointerPaused || focusPaused || document.hidden;
+  }
+
+  function updateToggle() {
+    if (!toggle) return;
+    const paused = isPaused();
+    toggle.setAttribute("aria-pressed", String(userPaused));
+    toggle.setAttribute("aria-label", paused
+      ? "ادامه حرکت خودکار گالری"
+      : "توقف حرکت خودکار گالری");
+    toggle.textContent = paused ? "ادامه حرکت گالری" : "توقف حرکت گالری";
+  }
+
+  function nearestPanelIndex() {
+    const viewportLeft = viewport.getBoundingClientRect().left;
+    let bestIndex = 0;
+    let bestDistance = Infinity;
+
+    panels.forEach((panel, index) => {
+      const distance = Math.abs(panel.getBoundingClientRect().left - viewportLeft);
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        bestIndex = index;
+      }
+    });
+
+    return bestIndex;
+  }
+
+  function advanceGallery() {
+    if (isPaused()) return;
+
+    const current = nearestPanelIndex();
+    const nextIndex = (current + 1) % panels.length;
+    const target = panels[nextIndex];
+    const left = Math.max(
+      0,
+      viewport.scrollLeft + target.getBoundingClientRect().left -
+        viewport.getBoundingClientRect().left
+    );
+
+    viewport.scrollTo({
+      left,
+      behavior: reducedMotion && !userStartedMotion ? "auto" : "smooth"
+    });
+  }
+
+  if (toggle) {
+    toggle.hidden = false;
+    toggle.addEventListener("click", () => {
+      userPaused = !userPaused;
+      if (!userPaused) userStartedMotion = true;
+      updateToggle();
+    });
+  }
+
+  viewport.addEventListener("mouseenter", () => {
+    pointerPaused = true;
+    updateToggle();
+  });
+  viewport.addEventListener("mouseleave", () => {
+    pointerPaused = false;
+    updateToggle();
+  });
+  viewport.addEventListener("focusin", () => {
+    focusPaused = true;
+    updateToggle();
+  });
+  viewport.addEventListener("focusout", (event) => {
+    focusPaused = viewport.contains(event.relatedTarget);
+    updateToggle();
+  });
+  viewport.addEventListener("touchstart", () => {
+    userPaused = true;
+    updateToggle();
+  }, { passive: true });
+
+  viewport.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    userPaused = true;
+    updateToggle();
+
+    const direction = event.key === "ArrowRight" ? 1 : -1;
+    const step = Math.max(180, viewport.clientWidth * 0.65);
+    const reduceNow = motionQuery && motionQuery.matches;
+    viewport.scrollBy({
+      left: direction * step,
+      behavior: reduceNow && !userStartedMotion ? "auto" : "smooth"
+    });
+  });
+
+  if (motionQuery && typeof motionQuery.addEventListener === "function") {
+    motionQuery.addEventListener("change", (event) => {
+      if (event.matches && !userStartedMotion) userPaused = true;
+      updateToggle();
+    });
+  } else if (motionQuery && typeof motionQuery.addListener === "function") {
+    motionQuery.addListener((event) => {
+      if (event.matches && !userStartedMotion) userPaused = true;
+      updateToggle();
+    });
+  }
+
+  document.addEventListener("visibilitychange", updateToggle);
+  updateToggle();
+  window.setInterval(advanceGallery, 6800);
+})();
 
 // Responsive navigation, independent of all third-party libraries.
 (() => {

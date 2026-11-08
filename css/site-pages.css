@@ -1176,3 +1176,149 @@ html[data-theme="light"] .services-picker .service-accordion__link { color:#1918
     color: #d0cec5;
   }
 }
+
+
+/* Service detail anchor aliases must not occupy a CSS-grid cell. */
+.service-detail {
+  position: relative;
+}
+.service-detail > .service-anchor-alias {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  display: block;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Keep service copy and its corresponding image together on narrow screens. */
+@media (max-width: 760px) {
+  .service-detail {
+    grid-template-columns: minmax(0, 1.22fr) minmax(108px, .78fr);
+    align-items: start;
+    gap: 14px;
+    padding-block: 26px;
+  }
+
+  .service-detail:nth-child(even) .media-frame {
+    order: 0;
+  }
+
+  .service-detail__copy {
+    min-width: 0;
+  }
+
+  .service-detail h2 {
+    margin-bottom: 8px;
+    font-size: 1.12rem;
+    line-height: 1.55;
+  }
+
+  .service-detail p {
+    margin-block: 7px;
+    font-size: .84rem;
+    line-height: 1.9;
+  }
+
+  .service-detail__note {
+    padding-inline-start: 9px;
+    font-size: .76rem !important;
+  }
+
+  .service-detail .media-frame {
+    align-self: start;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .service-detail .media-frame img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+
+  .service-detail .outline-link {
+    min-height: 40px;
+    margin-top: 8px;
+    padding: 7px 10px;
+    font-size: .76rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .service-detail {
+    grid-template-columns: minmax(0, 1.18fr) minmax(96px, .82fr);
+    gap: 10px;
+    padding-block: 22px;
+  }
+
+  .service-detail h2 {
+    font-size: 1.02rem;
+  }
+
+  .service-detail p {
+    font-size: .79rem;
+    line-height: 1.85;
+  }
+
+  .service-detail__note {
+    font-size: .72rem !important;
+  }
+
+  .service-detail .outline-link {
+    padding-inline: 8px;
+    font-size: .72rem;
+  }
+}
+
+/* Day theme for the three-principles image stage and its glass cards. */
+html[data-theme="light"] .about-principles-section {
+  background: #eee9de;
+  border-color: rgba(142, 110, 59, .28);
+}
+
+html[data-theme="light"] .about-principles-section::before {
+  background:
+    linear-gradient(90deg, rgba(250, 248, 242, .80), rgba(250, 248, 242, .88)),
+    linear-gradient(0deg, rgba(250, 248, 242, .18), rgba(250, 248, 242, .18)),
+    url("../images/radmehr-concept-interior-960.webp") center 48% / cover no-repeat;
+}
+
+html[data-theme="light"] .about-principles-section .section-heading h2 {
+  color: #2b2923;
+}
+
+html[data-theme="light"] .about-principles-section .section-heading__eyebrow,
+html[data-theme="light"] .about-principles-section .principle-cards article > span {
+  color: #856331;
+}
+
+html[data-theme="light"] .about-principles-section .principle-cards article {
+  border-color: rgba(142, 110, 59, .26);
+  background: rgba(255, 253, 248, .88);
+  box-shadow: 0 14px 32px rgba(64, 49, 25, .10);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+}
+
+html[data-theme="light"] .about-principles-section .principle-cards h3 {
+  color: #29251f;
+}
+
+html[data-theme="light"] .about-principles-section .principle-cards p {
+  color: #655e53;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-showcase__autoplay-toggle {
+    transition: none;
+  }
+}

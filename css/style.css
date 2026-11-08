@@ -2250,40 +2250,118 @@ img { height: auto; }
   }
 }
 
-/* Three subtle concentric rings restore the circular R brand motif.
-   The SVG underneath stays unchanged and the effect scales with the logo. */
-.brand,
-.site-footer__logo {
-  position: relative;
-  isolation: isolate;
+
+/* Stronger cinematic camera movement on the featured architectural image. */
+@media (prefers-reduced-motion: no-preference) {
+  .featured-project__visual img {
+    width: 130% !important;
+    max-width: none;
+    height: 100%;
+    transform-origin: 50% 50%;
+    animation: radmehr-cinematic-pan 28s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  @keyframes radmehr-cinematic-pan {
+    0% { transform: translate3d(0, 0, 0) scale(1.05); }
+    50% { transform: translate3d(-5%, -.35%, 0) scale(1.14); }
+    100% { transform: translate3d(-10%, .55%, 0) scale(1.20); }
+  }
+
+  .reveal-in {
+    animation: radmehr-soft-rise .52s cubic-bezier(.2, .75, .25, 1);
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+
+  @keyframes radmehr-soft-rise {
+    from { transform: translate3d(0, 14px, 0); }
+    to { transform: translate3d(0, 0, 0); }
+  }
+
+  .about__mark {
+    box-shadow:
+      0 0 0 8px rgba(201, 166, 107, .09),
+      0 0 0 17px rgba(201, 166, 107, .055),
+      0 0 28px rgba(201, 166, 107, .18),
+      inset 0 0 24px rgba(201, 166, 107, .08);
+  }
+
+  .about__mark::before {
+    inset: 10%;
+    border: 1.5px solid rgba(201, 166, 107, .72);
+    box-shadow: 0 0 13px rgba(201, 166, 107, .12);
+  }
+
+  .about__mark::after {
+    inset: 23%;
+    border: 1px dashed rgba(201, 166, 107, .62);
+  }
+
+  .about__mark > span {
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 0 24px rgba(201, 166, 107, .20);
+  }
+
+  .about__mark > i {
+    z-index: 3;
+    box-shadow:
+      0 0 0 7px rgba(201, 166, 107, .16),
+      0 0 18px rgba(201, 166, 107, .55);
+  }
 }
 
-.brand::before,
-.site-footer__logo::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  left: 2%;
-  top: 50%;
-  width: 25%;
-  aspect-ratio: 1;
-  transform: translateY(-50%);
-  border-radius: 50%;
-  pointer-events: none;
-  background: radial-gradient(
-    circle,
-    transparent 0 46%,
-    rgba(201, 166, 107, .58) 47% 49%,
-    transparent 50% 64%,
-    rgba(201, 166, 107, .40) 65% 67%,
-    transparent 68% 82%,
-    rgba(201, 166, 107, .78) 83% 85%,
-    transparent 86%
-  );
+.project-showcase__autoplay-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 42px;
+  margin-top: 16px;
+  padding: 8px 17px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--accent-link);
+  font: inherit;
+  font-size: .88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
 
-.brand img,
-.site-footer__logo img {
-  position: relative;
-  z-index: 1;
+.project-showcase__autoplay-toggle:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.project-showcase__autoplay-toggle:focus-visible {
+  outline: 3px solid var(--accent-link);
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .featured-project__visual img {
+    width: 130% !important;
+  }
+
+  .project-showcase__autoplay-toggle {
+    min-height: 44px;
+    margin-top: 12px;
+    font-size: .84rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-project__visual img {
+    animation: none !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100%;
+    will-change: auto;
+  }
+  .reveal-in {
+    animation: none !important;
+    transform: none !important;
+  }
 }
