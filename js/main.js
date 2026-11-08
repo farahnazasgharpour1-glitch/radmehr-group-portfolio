@@ -226,7 +226,7 @@ projectCards.forEach((card) => {
 
   document.addEventListener("visibilitychange", updateToggle);
   updateToggle();
-  window.setInterval(advanceGallery, 6800);
+  window.setInterval(advanceGallery, 6200);
 })();
 
 // Responsive navigation, independent of all third-party libraries.
