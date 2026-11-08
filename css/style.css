@@ -2553,3 +2553,27 @@ button,
 .contact__button {
   font-weight: 600;
 }
+
+/* Final button typography refinement: lighter labels across the site. */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+a.header-cta,
+a.text-link,
+a.outline-link,
+a.service-accordion__link,
+a.thank-you-action,
+a.featured-project__link,
+a.contact-cta,
+a.contact__button,
+a.about__link,
+a.site-footer__cta,
+.project-card__toggle,
+.project-showcase__autoplay-toggle,
+.contact-form__submit,
+.service-accordion__toggle,
+.home-services .section-action .outline-link,
+.services-picker .service-accordion__link {
+  font-weight: 500 !important;
+}
