@@ -2531,3 +2531,25 @@ html[data-theme="light"] .featured-project__visual {
     inset 0 1px 0 rgba(255, 255, 255, .78),
     0 0 0 1px rgba(142, 110, 59, .05);
 }
+
+/* Final typography refinement: keep Estedad, reduce visual heaviness. */
+section h2,
+.site-footer__column h2,
+.site-footer__contact h2 {
+  font-weight: 600;
+}
+
+.featured-project__intro h1,
+.project-showcase__heading h2,
+.showcase-panel__caption h3 {
+  font-weight: 700;
+}
+
+button,
+.featured-project__link,
+.contact-cta,
+.showcase-panel__caption a,
+.about__link,
+.contact__button {
+  font-weight: 600;
+}
