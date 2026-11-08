@@ -2365,3 +2365,92 @@ img { height: auto; }
     transform: none !important;
   }
 }
+
+
+/* Cinematic architectural hero: restrained vignette, gallery frame and film-like caption. */
+.featured-project__visual {
+  isolation: isolate;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, .34), inset 0 0 0 1px rgba(215, 186, 130, .16);
+}
+.featured-project__visual img {
+  filter: saturate(.84) contrast(1.07);
+}
+.featured-project__visual::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 14px;
+  border: 1px solid rgba(230, 202, 151, .42);
+  border-radius: 13px;
+  pointer-events: none;
+  box-shadow: inset 0 0 28px rgba(0, 0, 0, .12);
+}
+.featured-project__visual::after {
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7, 9, 8, .08) 0%, transparent 34%, rgba(7, 9, 8, .78) 100%),
+    linear-gradient(90deg, rgba(7, 9, 8, .16), transparent 28%, transparent 72%, rgba(7, 9, 8, .18)),
+    radial-gradient(ellipse at 50% 45%, transparent 42%, rgba(5, 7, 6, .28) 100%);
+}
+.featured-project__caption {
+  z-index: 3;
+  padding-top: 12px;
+  border-top: 1px solid rgba(230, 202, 151, .52);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .55);
+}
+.featured-project__caption span:last-child {
+  color: rgba(255, 255, 255, .88);
+  letter-spacing: .04em;
+}
+@media (max-width: 760px) {
+  .featured-project__visual::before {
+    inset: 10px;
+    border-radius: 10px;
+  }
+  .featured-project__caption {
+    padding-top: 9px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .featured-project__visual img { filter: none; }
+}
+
+/* Mobile gallery remains horizontal so automatic progression works on every screen. */
+@media (max-width: 760px) {
+  .project-showcase__viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 2px;
+  }
+  .project-showcase__viewport::-webkit-scrollbar { display: none; }
+  .project-showcase__track {
+    width: max-content;
+    flex-direction: row;
+    gap: 14px;
+  }
+  .showcase-panel,
+  .showcase-panel--image {
+    flex: 0 0 min(86vw, 540px);
+    width: min(86vw, 540px);
+    height: clamp(340px, 78vw, 420px);
+    min-height: 0;
+    aspect-ratio: auto;
+    scroll-snap-align: start;
+  }
+  .showcase-panel__caption {
+    inset-inline: 18px;
+    bottom: 18px;
+  }
+}
+@media (max-width: 420px) {
+  .showcase-panel,
+  .showcase-panel--image {
+    flex-basis: 88vw;
+    width: 88vw;
+    height: 350px;
+  }
+}
