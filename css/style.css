@@ -2228,7 +2228,7 @@ img { height: auto; }
 
   /* Scroll reveals affect position only; text and images are never hidden. */
   .reveal-in {
-    animation: radmehr-soft-rise .52s cubic-bezier(.2, .75, .25, 1) both;
+    animation: radmehr-soft-rise .52s cubic-bezier(.2, .75, .25, 1);
     animation-delay: var(--reveal-delay, 0ms);
   }
 
