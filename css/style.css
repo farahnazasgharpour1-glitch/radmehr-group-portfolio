@@ -1820,20 +1820,20 @@ html:not(.js-ready) .project-card__toggle { display:none; }
 .project-card__visual .project-card__toggle,
 .project-card.is-open .project-card__visual .project-card__toggle {
   position: absolute;
-  left: 50%;
-  right: auto;
+  left: 0;
+  right: 0;
   bottom: 2px;
   z-index: 4;
   display: inline-flex;
   width: max-content;
   max-width: calc(100% - 24px);
   min-height: 42px;
-  margin: 0;
+  margin: 0 auto;
   padding: 8px 16px;
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  transform: translateX(-50%);
+  transform: none;
   border-color: rgba(232, 202, 148, .88);
   background: rgba(7, 9, 7, .97);
   color: #f8f0df;
@@ -1842,7 +1842,7 @@ html:not(.js-ready) .project-card__toggle { display:none; }
 
 .project-card__visual .project-card__toggle:hover,
 .project-card.is-open .project-card__visual .project-card__toggle:hover {
-  transform: translateX(-50%);
+  transform: none;
   border-color: #f0d39c;
   background: #292116;
 }
