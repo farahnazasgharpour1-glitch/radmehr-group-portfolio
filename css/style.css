@@ -2477,3 +2477,8 @@ img { height: auto; }
   transform: scale(1.04);
   transform-origin: center center;
 }
+
+/* Respect the hidden state of the gallery control. */
+.project-showcase__autoplay-toggle[hidden] {
+  display: none !important;
+}
