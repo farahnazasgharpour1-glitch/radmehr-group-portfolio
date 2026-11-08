@@ -2482,3 +2482,45 @@ img { height: auto; }
 .project-showcase__autoplay-toggle[hidden] {
   display: none !important;
 }
+
+
+/* Refined visual balance for the homepage architecture showcase. */
+.project-showcase {
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(196, 168, 117, .13), transparent 38rem),
+    radial-gradient(ellipse at 92% 100%, rgba(196, 168, 117, .055), transparent 42rem),
+    linear-gradient(135deg, #171614 0%, #211e19 52%, #171614 100%);
+}
+
+html[data-theme="light"] .project-showcase {
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(142, 110, 59, .13), transparent 38rem),
+    radial-gradient(ellipse at 92% 100%, rgba(142, 110, 59, .055), transparent 42rem),
+    linear-gradient(135deg, #f3efe7 0%, #e9e2d7 52%, #f3efe7 100%);
+  border-block-color: rgba(142, 110, 59, .24);
+}
+
+/* Desktop gallery cards: a slightly shorter 16:10-like editorial frame. */
+@media (min-width: 761px) {
+  .showcase-panel,
+  .showcase-panel--image {
+    height: clamp(420px, 50vh, 480px);
+    height: clamp(420px, 50svh, 480px);
+  }
+}
+
+/* The hero keeps its outer edge, with the same soft top glint as the service cards. */
+.featured-project__visual {
+  border: 1px solid rgba(212, 180, 122, .34);
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, .34),
+    inset 0 1px 0 rgba(255, 255, 255, .12),
+    0 0 0 1px rgba(212, 180, 122, .055);
+}
+html[data-theme="light"] .featured-project__visual {
+  border-color: rgba(142, 110, 59, .34);
+  box-shadow:
+    0 24px 48px rgba(64, 49, 25, .14),
+    inset 0 1px 0 rgba(255, 255, 255, .78),
+    0 0 0 1px rgba(142, 110, 59, .05);
+}
