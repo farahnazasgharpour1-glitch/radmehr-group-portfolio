@@ -138,29 +138,39 @@ galleryViewport?.addEventListener("keydown", (event) => {
 })();
 
 
-// Lightweight native reveal motion — no library or CDN.
+// Progressive native reveal: never hide content before or after intersection.
+// Long page sections and large containers are intentionally excluded so a
+// tall services page can never remain invisible because of an intersection threshold.
 (() => {
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduceMotion = window.matchMedia
+    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    : false;
+
   if (reduceMotion || !("IntersectionObserver" in window)) return;
 
   const targets = document.querySelectorAll(
-    "main > section, .section-heading, .service-tile, .project-card, .showcase-panel, .content-section > .container, .contact-page__intro, .contact-glass-panel, .site-footer__column, .site-footer__contact"
+    ".section-heading, .service-tile, .service-accordion, " +
+    ".principle-cards > article, .project-card, .showcase-panel, " +
+    ".service-detail__copy, .project-list-card__copy, " +
+    ".contact-page__intro, .contact-glass-panel, " +
+    ".site-footer__column, .site-footer__contact"
   );
-  if (!targets.length) return;
 
-  targets.forEach((item, index) => {
-    item.dataset.reveal = "";
-    item.style.setProperty("--reveal-delay", (index % 4) * 75 + "ms");
-  });
-  document.documentElement.classList.add("motion-ready");
+  if (!targets.length) return;
 
   const observer = new IntersectionObserver((entries, currentObserver) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-visible");
+      entry.target.classList.add("reveal-in");
       currentObserver.unobserve(entry.target);
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -36px 0px" });
+  }, {
+    threshold: 0.01,
+    rootMargin: "0px 0px -18px 0px"
+  });
 
-  targets.forEach((item) => observer.observe(item));
+  targets.forEach((item, index) => {
+    item.style.setProperty("--reveal-delay", (index % 3) * 45 + "ms");
+    observer.observe(item);
+  });
 })();

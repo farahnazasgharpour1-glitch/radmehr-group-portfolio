@@ -1124,3 +1124,55 @@ html[data-theme="light"] .services-picker .service-accordion__link { color:#1918
 /* Deep links: keep service cards clear of the sticky header. */
 .service-accordion[id] { scroll-margin-top: 112px; }
 .service-anchor-alias { display: block; height: 0; scroll-margin-top: 112px; }
+
+ 
+/* The three-principles background is part of the mobile layout too. */
+@media (max-width: 760px) {
+  .about-principles-section {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: #151914;
+    border-color: rgba(var(--accent-rgb), .28);
+  }
+
+  .about-principles-section::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(15, 18, 15, .78), rgba(15, 18, 15, .86)),
+      url("../images/radmehr-concept-interior-960.webp") center 48% / cover no-repeat;
+  }
+
+  .about-principles-section > .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-principles-section .section-heading h2 {
+    color: #f0eee8;
+  }
+
+  .about-principles-section .section-heading__eyebrow,
+  .about-principles-section .principle-cards article > span {
+    color: #d7ba82;
+  }
+
+  .about-principles-section .principle-cards article {
+    border-color: rgba(215, 186, 130, .34);
+    background: rgba(17, 19, 16, .86);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+
+  .about-principles-section .principle-cards h3 {
+    color: #f0eee8;
+  }
+
+  .about-principles-section .principle-cards p {
+    color: #d0cec5;
+  }
+}

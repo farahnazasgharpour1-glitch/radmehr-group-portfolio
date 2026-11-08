@@ -2212,20 +2212,78 @@ img { height: auto; }
   }
 }
 
-/* Modern, restrained reveal motion; content stays visible without JavaScript. */
+
+/* Cinematic hero image: continuous, subtle movement on desktop and mobile. */
 @media (prefers-reduced-motion: no-preference) {
-  .motion-ready [data-reveal] {
-    opacity: 0;
-    transform: translate3d(0, 22px, 0);
-    transition: opacity .65s ease, transform .75s cubic-bezier(.2,.75,.25,1);
-    transition-delay: var(--reveal-delay, 0ms);
-    will-change: opacity, transform;
+  .featured-project__visual img {
+    transform-origin: 50% 50%;
+    animation: radmehr-cinematic-drift 22s ease-in-out infinite alternate;
+    will-change: transform;
   }
-  .motion-ready [data-reveal].is-visible {
-    opacity: 1;
-    transform: none;
+
+  @keyframes radmehr-cinematic-drift {
+    from { transform: scale(1.045) translate3d(0, 0, 0); }
+    to { transform: scale(1.12) translate3d(-1.1%, .45%, 0); }
+  }
+
+  /* Scroll reveals affect position only; text and images are never hidden. */
+  .reveal-in {
+    animation: radmehr-soft-rise .52s cubic-bezier(.2, .75, .25, 1) both;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+
+  @keyframes radmehr-soft-rise {
+    from { transform: translate3d(0, 14px, 0); }
+    to { transform: translate3d(0, 0, 0); }
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .featured-project__visual img {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
+  .reveal-in {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Three subtle concentric rings restore the circular R brand motif.
+   The SVG underneath stays unchanged and the effect scales with the logo. */
+.brand,
+.site-footer__logo {
+  position: relative;
+  isolation: isolate;
+}
+
+.brand::before,
+.site-footer__logo::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 2%;
+  top: 50%;
+  width: 25%;
+  aspect-ratio: 1;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    transparent 0 46%,
+    rgba(201, 166, 107, .58) 47% 49%,
+    transparent 50% 64%,
+    rgba(201, 166, 107, .40) 65% 67%,
+    transparent 68% 82%,
+    rgba(201, 166, 107, .78) 83% 85%,
+    transparent 86%
+  );
+}
+
+.brand img,
+.site-footer__logo img {
+  position: relative;
+  z-index: 1;
 }
