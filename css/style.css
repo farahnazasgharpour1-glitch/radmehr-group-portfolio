@@ -2367,23 +2367,18 @@ img { height: auto; }
 }
 
 
-/* Cinematic architectural hero: restrained vignette, gallery frame and film-like caption. */
+/* Cinematic architectural hero: clean image, soft grading and no decorative frame. */
 .featured-project__visual {
   isolation: isolate;
-  box-shadow: 0 28px 70px rgba(0, 0, 0, .34), inset 0 0 0 1px rgba(215, 186, 130, .16);
+  border: 0;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, .34);
 }
 .featured-project__visual img {
   filter: saturate(.84) contrast(1.07);
 }
+/* The image itself stays cinematic; no inset gold frame. */
 .featured-project__visual::before {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  inset: 14px;
-  border: 1px solid rgba(230, 202, 151, .42);
-  border-radius: 13px;
-  pointer-events: none;
-  box-shadow: inset 0 0 28px rgba(0, 0, 0, .12);
+  display: none;
 }
 .featured-project__visual::after {
   inset: 0;
@@ -2394,21 +2389,18 @@ img { height: auto; }
 }
 .featured-project__caption {
   z-index: 3;
-  padding-top: 12px;
-  border-top: 1px solid rgba(230, 202, 151, .52);
+  padding-top: 0;
+  border-top: 0;
   text-shadow: 0 2px 12px rgba(0, 0, 0, .55);
 }
-.featured-project__caption span:last-child {
-  color: rgba(255, 255, 255, .88);
-  letter-spacing: .04em;
+.featured-project__caption span:first-child {
+  direction: rtl;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 @media (max-width: 760px) {
-  .featured-project__visual::before {
-    inset: 10px;
-    border-radius: 10px;
-  }
   .featured-project__caption {
-    padding-top: 9px;
+    padding-top: 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {
