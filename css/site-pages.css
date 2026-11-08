@@ -1016,7 +1016,7 @@ html[data-theme="light"] .services-picker .service-accordion__link { color:#1918
     background:
       linear-gradient(90deg, rgba(15, 18, 15, .88), rgba(15, 18, 15, .76)),
       linear-gradient(0deg, rgba(15, 18, 15, .2), rgba(15, 18, 15, .2)),
-      url("../images/radmehr-concept-interior.webp") center 48% / cover no-repeat;
+      url("../images/radmehr-concept-interior-960.webp") center 48% / cover no-repeat;
   }
 
   .about-principles-section .section-heading h2 {
@@ -1114,3 +1114,13 @@ html[data-theme="light"] .services-picker .service-accordion__link { color:#1918
     align-self: flex-end;
   }
 }
+
+
+/* Deep-linked service details stay clear of the sticky header. */
+.service-detail[id] { scroll-margin-top: 112px; }
+.service-accordion__summary { min-height: 44px; }
+
+
+/* Deep links: keep service cards clear of the sticky header. */
+.service-accordion[id] { scroll-margin-top: 112px; }
+.service-anchor-alias { display: block; height: 0; scroll-margin-top: 112px; }

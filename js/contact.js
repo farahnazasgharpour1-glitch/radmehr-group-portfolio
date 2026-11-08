@@ -2,9 +2,8 @@
    RADMEHR GROUP — Contact page interactions
    - Accessible client-side validation
    - Persian/Arabic digit normalization for phone checking
-   - Respect for prefers-reduced-motion
-   - GSAP motion only enhances the page; content stays visible
-     when the animation libraries are unavailable
+   - Progressive enhancement: native validation without JavaScript
+   - Persian custom validation and safe status messaging when JavaScript is active
 ========================================================= */
 (() => {
   "use strict";
@@ -62,6 +61,8 @@
   }
 
   if (form && status && nameField && phoneField && emailField && typeField && messageField) {
+    // Disable native browser bubbles only after this script is running; if JS fails, HTML validation remains available.
+    form.noValidate = true;
     const fields = [nameField, phoneField, emailField, typeField, messageField];
 
     fields.forEach((field) => {
@@ -87,6 +88,7 @@
       }
 
       const phone = toLatinDigits(phoneField.value.trim());
+      phoneField.value = phone;
       const phoneDigits = phone.replace(/\D/g, "");
       const phoneHasUnsupportedChars = /[^\d\s()+.\-]/.test(phone);
       if (phoneHasUnsupportedChars || phoneDigits.length < 8 || phoneDigits.length > 15) {
@@ -159,11 +161,15 @@
       payload.set("subject", "درخواست جدید از سایت رادمهر گروپ");
       payload.set("from_name", "Radmehr Group | Contact Form");
 
+      const controller = new AbortController();
+      const requestTimeout = window.setTimeout(() => controller.abort(), 20000);
+
       try {
         const response = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
           headers: { Accept: "application/json" },
-          body: payload
+          body: payload,
+          signal: controller.signal
         });
 
         let result = {};
@@ -184,7 +190,9 @@
         window.location.assign("thank-you.html");
         return;
       } catch (error) {
-        if (error.status === 429) {
+        if (error.name === "AbortError") {
+          status.textContent = "پاسخ سرویس بیش از حد طول کشید. لطفاً اتصال اینترنت را بررسی و دوباره تلاش کنید.";
+        } else if (error.status === 429) {
           status.textContent = "درخواست‌های زیادی در فاصلهٔ کوتاه ارسال شده است. لطفاً کمی بعد دوباره تلاش کنید.";
         } else if (error instanceof TypeError) {
           status.textContent = "ارتباط با سرویس ارسال برقرار نشد. اتصال اینترنت را بررسی کنید و دوباره تلاش کنید.";
@@ -194,6 +202,7 @@
         status.classList.add("is-invalid");
         status.hidden = false;
       } finally {
+        window.clearTimeout(requestTimeout);
         form.removeAttribute("aria-busy");
         if (submitButton) {
           submitButton.disabled = false;
@@ -205,89 +214,4 @@
     // The button is enabled in HTML too, so native form submission remains possible
     // when JavaScript is disabled. JavaScript only enhances validation and status UI.
   }
-
-  // Motion is optional: the page remains readable if a CDN is unavailable.
-  const animationEngine = window.gsap;
-  const scrollPlugin = window.ScrollTrigger;
-
-  if (!animationEngine) return;
-
-  if (scrollPlugin) {
-    animationEngine.registerPlugin(scrollPlugin);
-  }
-
-  const motionMedia = animationEngine.matchMedia();
-  motionMedia.add("(prefers-reduced-motion: no-preference)", () => {
-    const introItems = animationEngine.utils.toArray("[data-contact-intro]");
-    const formPanel = document.querySelector(".contact-form-panel");
-    const asidePanel = document.querySelector(".contact-page__aside");
-
-    if (introItems.length) {
-      animationEngine.from(introItems, {
-        autoAlpha: 0,
-        y: 18,
-        duration: 0.72,
-        stagger: 0.1,
-        ease: "power2.out",
-        delay: 0.08,
-        clearProps: "all"
-      });
-    }
-
-    const panels = [asidePanel, formPanel].filter(Boolean);
-    if (panels.length) {
-      animationEngine.from(panels, {
-        autoAlpha: 0,
-        y: 22,
-        duration: 0.82,
-        stagger: 0.13,
-        delay: 0.24,
-        ease: "power3.out",
-        clearProps: "all"
-      });
-    }
-
-    const glowOne = document.querySelector(".contact-backdrop__glow--one");
-    const glowTwo = document.querySelector(".contact-backdrop__glow--two");
-
-    if (glowOne) {
-      animationEngine.to(glowOne, {
-        x: 14,
-        y: -10,
-        opacity: 0.48,
-        duration: 7.5,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut"
-      });
-    }
-
-    if (glowTwo) {
-      animationEngine.to(glowTwo, {
-        x: -12,
-        y: 10,
-        opacity: 0.68,
-        duration: 9,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: 0.6
-      });
-    }
-
-    const backdropLine = document.querySelector(".contact-backdrop__line");
-    const pageSection = document.querySelector(".contact-page");
-    if (scrollPlugin && backdropLine && pageSection) {
-      animationEngine.to(backdropLine, {
-        opacity: 0.16,
-        ease: "none",
-        scrollTrigger: {
-          trigger: pageSection,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.8
-        }
-      });
-    }
-  });
 })();

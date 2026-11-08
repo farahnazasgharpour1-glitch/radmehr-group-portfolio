@@ -2,29 +2,10 @@
    RADMEHR GROUP — Contact page
    Depends on the shared variables/components in style.css.
    Background photo is decorative; content stays readable
-   even if the image or animation libraries fail to load.
+   even if the image or JavaScript enhancements are unavailable.
 ========================================================= */
 
-/* Minimal recommended Lenis styling; kept local to avoid
-   requiring a second external stylesheet. */
-   html.lenis,
-   html.lenis body {
-     height: auto;
-   }
-
-   html.lenis.lenis-smooth {
-     scroll-behavior: auto !important;
-   }
-
-   html.lenis.lenis-stopped {
-     overflow: hidden;
-   }
-
-   html.lenis.lenis-smooth [data-lenis-prevent] {
-     overscroll-behavior: contain;
-   }
-
-   .contact-page-body {
+.contact-page-body {
      position: relative;
      isolation: isolate;
      min-height: 100vh;
@@ -49,7 +30,7 @@
      background-image:
        linear-gradient(90deg, rgb(10 14 11 / 78%) 0%, rgb(10 14 11 / 56%) 48%, rgb(10 14 11 / 58%) 100%),
        linear-gradient(180deg, rgb(10 14 11 / 36%) 0%, rgb(10 14 11 / 10%) 42%, rgb(10 14 11 / 82%) 100%),
-       url("../images/contact-architecture.webp");
+       url("../images/contact-architecture-960.webp");
      background-size: cover;
      background-position: center 48%;
      background-repeat: no-repeat;
@@ -637,7 +618,7 @@
      background-image:
        linear-gradient(90deg, rgb(10 14 11 / 62%) 0%, rgb(10 14 11 / 42%) 48%, rgb(10 14 11 / 48%) 100%),
        linear-gradient(180deg, rgb(10 14 11 / 25%) 0%, rgb(10 14 11 / 8%) 42%, rgb(10 14 11 / 70%) 100%),
-       url("../images/contact-architecture.webp");
+       url("../images/contact-architecture-960.webp");
    }
 
    html[data-theme="light"] .contact-glass-panel {

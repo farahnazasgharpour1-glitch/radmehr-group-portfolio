@@ -1,13 +1,268 @@
-<!doctype html>
-<html lang="fa" dir="rtl">
+<!DOCTYPE html>
+
+<html data-theme="dark" dir="rtl" lang="fa">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,follow">
-  <meta http-equiv="refresh" content="0; url=html/">
-  <title>ورود به وب‌سایت رادمهر گروپ</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link as="font" crossorigin="" href="font/Estedad.woff2" rel="preload" type="font/woff2"/>
+<meta content="#111310" name="theme-color"/>
+<title>رادمهر گروپ | معماری معاصر و طرح‌های مفهومی</title>
+<meta content="رادمهر گروپ؛ معرفی رویکرد معماری و طرح‌های مفهومی مسکونی و اداری با تمرکز بر نور، متریال، عملکرد و کیفیت تجربهٔ فضا." name="description"/>
+<!-- Theme preference is applied locally before styles are rendered. -->
+<!-- تنها فایل CSS اختصاصی پروژه -->
+<script>
+(() => {
+  const root = document.documentElement;
+  let theme = "dark";
+  try {
+    const saved = localStorage.getItem("radmehr-theme");
+    theme = saved === "light" || saved === "dark"
+      ? saved
+      : (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+  } catch (_) {
+    // Keep a stable dark theme when storage or matchMedia is unavailable.
+  }
+  root.dataset.theme = theme;
+  root.style.colorScheme = theme;
+})();
+</script>
+<link href="css/style.css" rel="stylesheet"><link href="css/site-pages.css" rel="stylesheet"/>
+<!-- نسخه‌های ثابت‌شده؛ ترتیب بارگذاری مهم است. -->
+<script defer="" src="js/main.js"></script>
+<link href="images/favicon.svg" rel="icon" type="image/svg+xml"/><meta content="fa_IR" property="og:locale"/><meta content="رادمهر گروپ" property="og:site_name"/><meta content="website" property="og:type"/><meta content="رادمهر گروپ | معماری معاصر و طرح‌های مفهومی" property="og:title"/><meta content="رادمهر گروپ؛ معرفی رویکرد معماری و طرح‌های مفهومی مسکونی و اداری با تمرکز بر نور، متریال، عملکرد و کیفیت تجربهٔ فضا." property="og:description"/>
+<link href="https://radmehr-group-demo.onrender.com/" rel="canonical"/>
+<meta content="https://radmehr-group-demo.onrender.com/" property="og:url"/>
+<meta content="https://radmehr-group-demo.onrender.com/images/radmehr-luxury-residential.webp" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<link as="image" fetchpriority="high" href="images/radmehr-luxury-residential.webp" imagesizes="(max-width: 760px) 100vw, (max-width: 1200px) 92vw, 720px" imagesrcset="images/radmehr-luxury-residential-640.webp 640w, images/radmehr-luxury-residential-960.webp 960w, images/radmehr-luxury-residential-1280.webp 1280w, images/radmehr-luxury-residential.webp 1600w" rel="preload" type="image/webp"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://radmehr-group-demo.onrender.com/#organization",
+      "name": "رادمهر گروپ",
+      "url": "https://radmehr-group-demo.onrender.com/",
+      "logo": "https://radmehr-group-demo.onrender.com/images/radmehr-logo-horizontal-gold.svg"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://radmehr-group-demo.onrender.com/#website",
+      "name": "رادمهر گروپ",
+      "url": "https://radmehr-group-demo.onrender.com/",
+      "inLanguage": "fa-IR",
+      "publisher": { "@id": "https://radmehr-group-demo.onrender.com/#organization" }
+    }
+  ]
+}
+</script>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
 </head>
-<body>
-  <p>در حال انتقال به وب‌سایت رادمهر گروپ هستید. <a href="html/">برای ورود اینجا را انتخاب کنید.</a></p>
+<body id="top">
+<a class="skip-link" href="#main-content">رفتن به محتوای اصلی</a>
+<header class="site-header" id="home">
+<div class="container">
+<!-- لوگوی رادمهر گروپ -->
+<a aria-label="رادمهر گروپ، صفحه اصلی" class="brand" href="#home">
+<img alt="رادمهر گروپ" data-dark-src="images/radmehr-logo-horizontal-gold.svg" data-light-src="images/radmehr-logo-horizontal-dark.svg" height="100" src="images/radmehr-logo-horizontal-gold.svg" width="390"/>
+</a>
+<!-- منوی اصلی -->
+<nav aria-label="منوی اصلی" class="main-nav" id="main-nav">
+<ul>
+<li><a href="#home">خانه</a></li>
+<li><a href="html/about.html">درباره ما</a></li>
+<li><a href="html/services.html">خدمات</a></li>
+<li><a href="html/projects.html">پروژه‌ها</a></li>
+<li><a href="html/contact.html">تماس با ما</a></li>
+</ul>
+</nav>
+<!-- تغییر تم -->
+<a class="header-cta" href="html/contact.html">درخواست مشاوره</a><button aria-label="تغییر به حالت روشن" class="theme-toggle" id="theme-toggle" type="button">
+<span aria-hidden="true" class="theme-toggle__icon">☼</span>
+<span id="theme-toggle-label">حالت روشن</span>
+</button>
+<!-- دکمه منوی همبرگری -->
+<button aria-controls="main-nav" aria-expanded="false" aria-label="باز کردن منو" class="nav-toggle" id="nav-toggle" type="button">
+<span class="nav-toggle__line"></span>
+<span class="nav-toggle__line"></span>
+<span class="nav-toggle__line"></span>
+</button>
+</div>
+</header>
+<main id="main-content"><section aria-labelledby="featured-project-title" class="featured-project" id="featured-project">
+<div class="featured-project__inner">
+<div class="featured-project__intro">
+<p class="featured-project__eyebrow">معماری، فراتر از یک سازه</p>
+<h1 id="featured-project-title">نگاهی تازه به زندگی مدرن</h1>
+<div class="featured-project__details">
+<p class="featured-project__description">
+            روایت معماری، متریال و جزئیاتی که یک فضا را به تجربه‌ای ماندگار تبدیل می‌کنند.
+          </p>
+<div class="featured-project__actions">
+<a class="featured-project__link" href="#projects">
+            کشف پروژه‌ها <span aria-hidden="true">↗</span>
+</a>
+<a class="contact-cta" href="html/contact.html">
+<span class="contact-cta__label">درخواست مشاوره</span>
+<span aria-hidden="true" class="contact-cta__arrow">↗</span>
+</a>
+</div>
+</div>
+</div>
+<figure class="featured-project__visual">
+<img alt="نمای مفهومی یک مجتمع مسکونی مدرن با ترکیب سنگ و شیشه" decoding="async" fetchpriority="high" height="900" loading="eager" sizes="(max-width: 760px) 100vw, (max-width: 1200px) 92vw, 720px" src="images/radmehr-luxury-residential.webp" srcset="images/radmehr-luxury-residential-640.webp 640w, images/radmehr-luxury-residential-960.webp 960w, images/radmehr-luxury-residential-1280.webp 1280w, images/radmehr-luxury-residential.webp 1600w" width="1600"/>
+<figcaption class="featured-project__caption">
+<span>RADMEHR GROUP</span>
+<span>01 — معماری معاصر</span>
+</figcaption>
+</figure>
+</div>
+</section><section aria-labelledby="about-title" class="about" id="about">
+<div class="container about__inner">
+<div aria-hidden="true" class="about__mark"><span>R</span><i></i></div>
+<div class="about__copy">
+<p class="section-heading__eyebrow">درباره مجموعه</p>
+<h2 id="about-title">رادمهر گروپ؛ معماری از ایده تا تجربهٔ فضا</h2>
+<p>در رادمهر گروپ، معماری را ترکیبی از زیبایی، عملکرد و کیفیت تجربه می‌دانیم. این وب‌سایت بستری برای معرفی ایده‌ها و نمونه‌های معماری مجموعه است؛ با تمرکز بر تناسبات، انتخاب متریال، نور و ارتباط سازه با محیط پیرامون.</p>
+<a class="about__link" href="html/contact.html">آشنایی و ارتباط با مجموعه <span aria-hidden="true">↗</span></a>
+</div>
+</div>
+</section><section aria-labelledby="home-services-title" class="home-services section-pad" id="services">
+<div class="container">
+<div class="section-heading"><p class="section-heading__eyebrow">حوزه‌های فعالیت</p><h2 id="home-services-title">راهکارهایی برای شکل‌دادن به فضا</h2><p>هفت حوزه طراحی و ساخت که در این وب‌سایت معرفی می‌شوند؛ برای آشنایی با شرح هرکدام، صفحه خدمات را ببینید.</p></div>
+<div class="service-grid service-grid--home">
+<a class="service-tile" href="html/services.html#architecture"><span aria-hidden="true" class="service-tile__icon">⌂</span><h3>طراحی معماری</h3><p>از ایده‌پردازی و سازمان‌دهی فضا تا فرم و نقشه معماری.</p><span class="text-link">جزئیات خدمت ↗</span></a>
+<a class="service-tile" href="html/services.html#interior"><span aria-hidden="true" class="service-tile__icon">▧</span><h3>طراحی داخلی</h3><p>هماهنگی نور، چیدمان، متریال و تجربه حضور در فضا.</p><span class="text-link">جزئیات خدمت ↗</span></a>
+<a class="service-tile" href="html/services.html#facade"><span aria-hidden="true" class="service-tile__icon">▤</span><h3>طراحی نما</h3><p>ایجاد هویت بصری متناسب با عملکرد و زمینه پروژه.</p><span class="text-link">جزئیات خدمت ↗</span></a>
+<a class="service-tile" href="html/services.html#construction"><span aria-hidden="true" class="service-tile__icon">⌑</span><h3>ساخت و اجرای ساختمان</h3><p>پیوند طرح، جزئیات فنی و مراحل اجرای ساختمان.</p><span class="text-link">جزئیات خدمت ↗</span></a>
+<a class="service-tile" href="html/services.html#renovation"><span aria-hidden="true" class="service-tile__icon">↻</span><h3>بازسازی و نوسازی</h3><p>بازتعریف فضاهای موجود با توجه به نیازهای تازه.</p><span class="text-link">جزئیات خدمت ↗</span></a>
+<a class="service-tile" href="html/services.html#management"><span aria-hidden="true" class="service-tile__icon">◎</span><h3>نظارت و مدیریت پروژه</h3><p>هماهنگی تصمیم‌ها، زمان‌بندی و کنترل مراحل کار.</p><span class="text-link">جزئیات خدمت ↗</span></a>
+<a class="service-tile" href="html/services.html#landscape"><span aria-hidden="true" class="service-tile__icon">⌁</span><h3>طراحی محوطه و فضای سبز</h3><p>ارتباط معماری با فضای باز، مسیرها و پوشش گیاهی.</p><span class="text-link">جزئیات خدمت ↗</span></a>
+</div>
+<div class="section-action"><a class="outline-link" href="html/services.html">مشاهده همه خدمات <span aria-hidden="true">↗</span></a></div>
+</div>
+</section><section aria-labelledby="project-showcase-title" class="project-showcase" id="project-showcase">
+<div class="project-showcase__heading">
+<p class="project-showcase__eyebrow">رویکرد طراحی</p>
+<h2 id="project-showcase-title">معماری؛ از ایده تا ماندگاری</h2>
+<p>
+          از انتخاب فرم و متریال تا سازمان‌دهی فضا، هر تصمیم باید به زیبایی، آسایش و عملکرد کمک کند.
+        </p>
+</div>
+<div aria-label="گالری مفهومی رویکرد معماری؛ برای پیمایش از کلیدهای جهت‌دار استفاده کنید" class="project-showcase__viewport" role="region" tabindex="0">
+<div class="project-showcase__track">
+<article class="showcase-panel showcase-panel--image">
+<img alt="طرح مفهومی ویلای مدرن با حجم‌های مینیمال، شیشه و استخر بازتابی در غروب" decoding="async" height="853" loading="lazy" sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 560px" src="images/radmehr-concept-villa.webp" srcset="images/radmehr-concept-villa-640.webp 640w, images/radmehr-concept-villa-960.webp 960w, images/radmehr-concept-villa.webp 1280w" width="1280"/>
+<div class="showcase-panel__caption">
+<h3>فرم و هویت</h3>
+<p>تناسب حجم‌ها، ریتم خطوط و پیوند بنا با زمینه، هویت بصری و شخصیت فضا را شکل می‌دهد.</p>
+</div>
+</article>
+<article class="showcase-panel showcase-panel--image">
+<img alt="طرح مفهومی فضای داخلی معاصر با نور طبیعی، سنگ روشن، چوب و پنجره‌های قدی" decoding="async" height="788" loading="lazy" sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 560px" src="images/radmehr-concept-interior.webp" srcset="images/radmehr-concept-interior-640.webp 640w, images/radmehr-concept-interior-960.webp 960w, images/radmehr-concept-interior-1280.webp 1280w, images/radmehr-concept-interior.webp 1400w" width="1400"/>
+<div class="showcase-panel__caption">
+<h3>متریال و جزئیات</h3>
+<p>انتخاب آگاهانه سنگ، چوب و شیشه، در کنار کیفیت اتصال اجزا، حس و دوام فضا را کامل می‌کند.</p>
+</div>
+</article>
+<article class="showcase-panel showcase-panel--image">
+<img alt="طرح مفهومی ساختمان اداری معاصر با نمای شیشه‌ای، نورپردازی گرم و محوطه‌سازی" decoding="async" height="675" loading="lazy" sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 560px" src="images/radmehr-concept-office.webp" srcset="images/radmehr-concept-office-640.webp 640w, images/radmehr-concept-office-960.webp 960w, images/radmehr-concept-office.webp 1200w" width="1200"/>
+<div class="showcase-panel__caption">
+<h3>عملکرد و آسایش</h3>
+<p>نور طبیعی، دسترسی روان و چیدمان سنجیده، فضایی کاربردی و آسوده برای زندگی و کار می‌سازند.</p>
+</div>
+</article>
+</div>
+</div>
+</section><section aria-labelledby="projects-title" class="projects" id="projects">
+<div class="container">
+<div class="section-heading">
+<p class="section-heading__eyebrow">سه نمونهٔ مفهومی</p>
+<h2 id="projects-title">طرح‌هایی با هویت ماندگار</h2>
+<p>از ویلای اختصاصی تا مجتمع مسکونی و فضای اداری؛ این سه طرح مفهومی، رویکردهای متفاوتی به فرم، متریال، نور و کیفیت تجربهٔ فضا را نمایش می‌دهند.</p>
+</div>
+<div class="projects-grid">
+<article class="project-card" id="villa-project">
+<div class="project-card__visual">
+<img alt="طرح مفهومی ویلای مدرن با خطوط معماری مینیمال، پنجره‌های سرتاسری و استخر بازتابی در غروب" decoding="async" height="900" loading="lazy" sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 560px" src="images/radmehr-project-villa.webp" srcset="images/radmehr-project-villa-640.webp 640w, images/radmehr-project-villa-960.webp 960w, images/radmehr-project-villa.webp 1200w" width="1200"/>
+<span class="project-card__index">01</span>
+<button aria-controls="villa-project-details" aria-expanded="false" class="project-card__toggle" type="button">
+<span class="project-card__toggle-label">جزئیات بیشتر</span><span aria-hidden="true" class="project-card__toggle-icon">↗</span>
+</button>
+</div>
+<div aria-hidden="true" class="project-card__content" id="villa-project-details">
+<p class="project-card__category">ویلای اختصاصی <span>معماری معاصر</span></p>
+<h3>ویلای مدرن؛ پیوند نور و طبیعت</h3>
+<p>در این طرح مفهومی، خطوط ساده و حجم‌های شفاف در کنار متریال گرم و ارتباط پیوسته با فضای باز قرار گرفته‌اند. پنجره‌های وسیع، تراس‌های عمیق و انعکاس آب، فضایی آرام و روشن را شکل می‌دهند؛ جایی که مرز میان داخل و بیرون نرم‌تر می‌شود.</p>
+<a aria-label="گفت‌وگو درباره پروژهٔ ویلای مدرن" class="project-card__contact" href="html/contact.html">گفت‌وگو درباره پروژه <span aria-hidden="true">↗</span></a>
+<a class="project-detail-link" href="html/project-villa.html">مشاهده صفحه پروژه</a></div>
+</article>
+<article class="project-card" id="residential-project">
+<div class="project-card__visual">
+<img alt="طرح مفهومی مجتمع مسکونی لوکس چندطبقه با بالکن‌های عریض، نورپردازی گرم و محوطه‌سازی معاصر" decoding="async" height="900" loading="lazy" sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 560px" src="images/radmehr-project-residential.webp" srcset="images/radmehr-project-residential-640.webp 640w, images/radmehr-project-residential-960.webp 960w, images/radmehr-project-residential.webp 1200w" width="1200"/>
+<span class="project-card__index">02</span>
+<button aria-controls="residential-project-details" aria-expanded="false" class="project-card__toggle" type="button">
+<span class="project-card__toggle-label">جزئیات بیشتر</span><span aria-hidden="true" class="project-card__toggle-icon">↗</span>
+</button>
+</div>
+<div aria-hidden="true" class="project-card__content" id="residential-project-details">
+<p class="project-card__category">مجتمع مسکونی <span>زندگی شهری</span></p>
+<h3>مجتمع مسکونی لوکس؛ کیفیت در هر طبقه</h3>
+<p>ترکیب بالکن‌های عریض، سطوح شیشه‌ای و متریال با بافت طبیعی، چهره‌ای امروزی و متعادل به این مجموعه می‌دهد. توجه به نور روز، دید مناسب و پیوند فضای سبز با مسیرهای دسترسی، ایدهٔ اصلی این رویکرد طراحی است.</p>
+<a aria-label="گفت‌وگو درباره مجتمع مسکونی لوکس" class="project-card__contact" href="html/contact.html">گفت‌وگو درباره پروژه <span aria-hidden="true">↗</span></a>
+<a class="project-detail-link" href="html/project-residential.html">مشاهده صفحه پروژه</a></div>
+</article>
+<article class="project-card" id="office-project">
+<div class="project-card__visual">
+<img alt="طرح مفهومی ساختمان اداری مدرن با نمای شیشه‌ای، خطوط عمودی و نورپردازی محوطه در زمان غروب" decoding="async" height="900" loading="lazy" sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 560px" src="images/radmehr-project-office.webp" srcset="images/radmehr-project-office-640.webp 640w, images/radmehr-project-office-960.webp 960w, images/radmehr-project-office.webp 1200w" width="1200"/>
+<span class="project-card__index">03</span>
+<button aria-controls="office-project-details" aria-expanded="false" class="project-card__toggle" type="button">
+<span class="project-card__toggle-label">جزئیات بیشتر</span><span aria-hidden="true" class="project-card__toggle-icon">↗</span>
+</button>
+</div>
+<div aria-hidden="true" class="project-card__content" id="office-project-details">
+<p class="project-card__category">فضای اداری <span>معماری عملکردگرا</span></p>
+<h3>ساختمان اداری؛ شفافیت و کارایی</h3>
+<p>نمای شیشه‌ای و ریتم منظم خطوط، هویتی حرفه‌ای و معاصر برای این ساختمان تعریف می‌کند. در این ایده، خوانایی ورودی، بهره‌گیری از نور طبیعی و ایجاد ارتباط بصری با محیط اطراف، در کنار تصویر سازمانی ساختمان اهمیت دارد.</p>
+<a aria-label="گفت‌وگو درباره ساختمان اداری مدرن" class="project-card__contact" href="html/contact.html">گفت‌وگو درباره پروژه <span aria-hidden="true">↗</span></a>
+<a class="project-detail-link" href="html/project-office.html">مشاهده صفحه پروژه</a></div>
+</article>
+</div>
+<p class="projects-note">این تصاویر و شرح‌ها نمونه‌های مفهومی برای نمایش رویکرد طراحی‌اند؛ اطلاعات اجرایی هر پروژه پس از تأیید مجموعه درج خواهد شد.</p>
+</div>
+</section><section aria-labelledby="process-title" class="process-section section-pad" id="process"><div class="container"><div class="section-heading"><p class="section-heading__eyebrow">مسیر شکل‌گیری یک ایده</p><h2 id="process-title">مراحل همکاری و پیشبرد پروژه</h2><p>این چارچوب، مسیر پیشنهادی گفت‌وگو و برنامه‌ریزی یک پروژه را نمایش می‌دهد؛ جزئیات اجرایی هر همکاری با توجه به دامنه کار تعیین می‌شود.</p></div><div class="process-grid" role="list"><div role="listitem"><h3>شناخت نیاز</h3><p>گفت‌وگو درباره خواسته‌ها، محدودیت‌ها و هدف‌های پروژه.</p></div><div role="listitem"><h3>تعریف مسیر</h3><p>تعیین محدوده خدمات، اولویت‌ها و خروجی‌های مورد انتظار.</p></div><div role="listitem"><h3>طراحی و هماهنگی</h3><p>توسعه ایده و هماهنگی تصمیم‌های طراحی با نیاز پروژه.</p></div><div role="listitem"><h3>اجرا و پیگیری</h3><p>در صورت قرار داشتن اجرا در دامنه همکاری، پیگیری مراحل و جزئیات پروژه.</p></div></div></div></section><section aria-labelledby="principles-title" class="principles-section section-pad" id="principles"><div class="container principles-layout"><div><p class="section-heading__eyebrow">اصول نگاه ما</p><h2 id="principles-title">زیبایی زمانی ماندگار است که به زندگی پاسخ دهد.</h2><p>در این رویکرد، فرم به‌تنهایی کافی نیست؛ نور، عملکرد، متریال و ارتباط فضا با محیط باید در کنار هم دیده شوند.</p></div><div class="principles-list"><article><span>01</span><div><h3>تناسب و هویت</h3><p>فرم و مقیاس باید با زمینه و کارکرد فضا هماهنگ باشند.</p></div></article><article><span>02</span><div><h3>جزئیات و متریال</h3><p>انتخاب آگاهانه متریال در کیفیت بصری و حسی فضا اثر می‌گذارد.</p></div></article><article><span>03</span><div><h3>عملکرد و آسایش</h3><p>نور، دسترسی و سازمان‌دهی درست فضا بخشی از کیفیت معماری‌اند.</p></div></article></div></div></section><section aria-labelledby="faq-title" class="faq-section section-pad" id="faq"><div class="container faq-layout"><div class="faq-intro"><p class="section-heading__eyebrow">پرسش‌های متداول</p><h2 id="faq-title">پیش از شروع، چه چیزهایی را بدانیم؟</h2><p>پاسخ‌های کوتاه به پرسش‌های اولیه درباره حوزه خدمات و طرح‌های مفهومی این وب‌سایت.</p><a class="outline-link" href="html/contact.html">پرسش دیگری دارید؟</a></div><div class="faq-list"><details><summary>آیا تصاویر بخش پروژه‌ها، پروژه‌های اجراشده هستند؟</summary><p>خیر. سه نمونه موجود در نسخه فعلی، طرح‌های مفهومی برای نمایش ایده و رویکرد بصری هستند و به‌عنوان سابقه اجرای واقعی معرفی نمی‌شوند.</p></details><details><summary>برای شروع گفت‌وگو درباره یک پروژه چه اطلاعاتی لازم است؟</summary><p>شرح کوتاهی از نوع پروژه، محل یا شرایط کلی آن، نیازهای اصلی و زمان‌بندی مورد نظر می‌تواند شروع مناسبی برای گفت‌وگو باشد.</p></details><details><summary>آیا می‌توان فقط برای طراحی معماری یا داخلی درخواست داد؟</summary><p>صفحه خدمات حوزه‌های مختلف را جداگانه معرفی می‌کند. دامنه و امکان ارائه هر خدمت باید با توجه به نیاز پروژه و توافق طرفین مشخص شود.</p></details><details><summary>هزینه و زمان انجام پروژه چطور مشخص می‌شود؟</summary><p>هزینه و زمان به ابعاد، پیچیدگی، محدوده خدمات و شرایط پروژه وابسته است؛ بنابراین بدون دریافت اطلاعات پروژه عددی در این وب‌سایت اعلام نمی‌شود.</p></details><details><summary>چطور می‌توان درخواست مشاوره فرستاد؟</summary><p>از صفحه تماس با ما، نوع درخواست را انتخاب کنید و توضیح کوتاهی درباره نیازتان بنویسید.</p></details></div></div></section><section aria-labelledby="contact-title" class="contact" id="contact">
+<div class="container contact__inner">
+<div>
+<p class="section-heading__eyebrow">شروع یک گفت‌وگو</p>
+<h2 id="contact-title">برای ایدهٔ بعدی‌تان آماده‌ایم</h2>
+<p>برای دریافت اطلاعات بیشتر درباره رویکرد طراحی یا مطرح‌کردن یک همکاری، از راه صفحهٔ تماس با ما در ارتباط باشید.</p>
+</div>
+<a class="contact__button" href="html/contact.html">ارتباط با رادمهر گروپ <span aria-hidden="true">↗</span></a>
+</div>
+</section></main>
+<footer aria-label="پاورقی سایت" class="site-footer">
+<div class="container site-footer__main">
+<div class="site-footer__brand">
+<a aria-label="بازگشت به صفحهٔ اصلی رادمهر گروپ" class="site-footer__logo" href="#home">
+<img alt="رادمهر گروپ" height="67" loading="lazy" src="images/radmehr-logo-horizontal-light.svg" width="260"/>
+</a>
+<p>معماری با نگاهی دقیق به نور، متریال و کیفیت تجربه فضا؛ از ایده تا فضایی ماندگار.</p>
+</div>
+<div class="site-footer__column"><h2>دسترسی سریع</h2><a href="/#home">صفحه اصلی</a><a href="html/about.html">درباره ما</a><a href="html/services.html">خدمات</a><a href="html/projects.html">پروژه‌ها</a><a href="html/contact.html">تماس با ما</a><a href="html/privacy.html">حریم خصوصی</a></div>
+<div class="site-footer__column"><h2>حوزه‌های فعالیت</h2><a href="html/services.html#architecture">طراحی معماری</a><a href="html/services.html#interior">طراحی داخلی</a><a href="html/services.html#facade">طراحی نما</a><a href="html/services.html#construction">ساخت و اجرا</a><a href="html/services.html#renovation">بازسازی</a><a href="html/services.html#management">نظارت و مدیریت</a><a href="html/services.html#landscape">طراحی محوطه</a></div>
+<div class="site-footer__contact">
+<p class="site-footer__eyebrow">گام بعدی از اینجا شروع می‌شود</p>
+<h2>ایده‌ای برای ساختن دارید؟</h2>
+<p>برای گفت‌وگو دربارهٔ ایده یا همکاری، با ما در ارتباط باشید.</p>
+<a class="site-footer__cta" href="html/contact.html">شروع گفت‌وگو <span aria-hidden="true">↗</span></a>
+</div>
+</div>
+<div class="container site-footer__bottom">
+<p>© <span id="footer-year">2026</span> رادمهر گروپ. تمامی حقوق محفوظ است.</p>
+<a data-scroll-top="" href="#top">بازگشت به بالا <span aria-hidden="true">↑</span></a>
+<span class="site-footer__signature">طراحی‌شده با توجه به جزئیات</span>
+<a href="html/privacy.html">حریم خصوصی</a></div>
+</footer>
 </body>
 </html>
