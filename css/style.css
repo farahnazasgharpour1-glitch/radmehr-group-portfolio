@@ -80,7 +80,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Estedad", Tahoma, sans-serif;
+  font-family: Tahoma, Arial, sans-serif;
   font-synthesis: weight;
   font-size: 16px;
   line-height: 1.8;
@@ -93,9 +93,9 @@ button, input, select, textarea {
   font: inherit;
 }
 
-/* Every heading inherits the same Estedad family as body copy. */
+/* Headings use Estedad; body copy and controls use the system Tahoma stack. */
 h1, h2, h3, h4, h5, h6 {
-  font-family: inherit;
+  font-family: "Estedad", Tahoma, Arial, sans-serif;
 }
 
 /* دسترسی سریع صفحه‌کلید به محتوای اصلی */
