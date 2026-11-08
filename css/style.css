@@ -584,7 +584,7 @@ section p {
   max-width: 12ch;
   margin: 0 0 24px;
   color: var(--text);
-  font-size: clamp(2.3rem, 5vw, 4.8rem);
+  font-size: clamp(2.1rem, 4.3vw, 4.2rem);
   font-weight: 800;
   line-height: 1.35;
   letter-spacing: -0.04em;
@@ -868,7 +868,7 @@ section p {
 
   .featured-project__intro h1 {
     max-width: 14ch;
-    font-size: clamp(2rem, 8vw, 3.2rem);
+    font-size: clamp(1.9rem, 6vw, 2.8rem);
     line-height: 1.45;
   }
 
@@ -2000,7 +2000,7 @@ html:not(.js-ready) .project-card__toggle { display:none; }
     grid-row: 2;
     max-width: 15ch;
     margin: 0;
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: clamp(1.75rem, 6.5vw, 2.4rem);
     line-height: 1.38;
   }
 
