@@ -2446,3 +2446,34 @@ img { height: auto; }
     height: 350px;
   }
 }
+
+
+/* Final gallery presentation and marquee behavior. */
+.featured-project__visual {
+  border: 1px solid var(--border);
+}
+.project-showcase__viewport {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.project-showcase__viewport::-webkit-scrollbar {
+  display: none;
+}
+.project-showcase.is-enhanced .project-showcase__viewport {
+  overflow: hidden;
+  scroll-snap-type: none;
+  touch-action: pan-y;
+}
+.project-showcase.is-enhanced .project-showcase__track {
+  will-change: transform;
+}
+.project-showcase.is-enhanced .showcase-panel {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+/* The third source image contains a thin white strip at its top edge. */
+.showcase-panel:nth-child(3) > img {
+  transform: scale(1.04);
+  transform-origin: center center;
+}
