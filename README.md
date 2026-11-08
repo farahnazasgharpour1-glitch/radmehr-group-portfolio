@@ -2,9 +2,9 @@
 
 A Persian (RTL), multi-page concept website for an architecture and construction brand. Built as a front-end portfolio project to demonstrate responsive layouts, visual design, and browser-native interactions.
 
-## Preview
+## Live Demo
 
-[Open the Render preview](https://radmehr-group-demo.onrender.com/)
+The site has not been deployed to a verified public URL yet. The live link will be added here after the Render Static Site is created and its assigned URL is tested.
 
 > The website is a concept/demo project, not an official company website. Project imagery and case studies are presented as design concepts; they do not claim completed construction work or real client commissions.
 
