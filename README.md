@@ -4,7 +4,7 @@ A Persian (RTL), multi-page concept website for an architecture and construction
 
 ## Live Demo
 
-The site has not been deployed to a verified public URL yet. The live link will be added here after the Render Static Site is created and its assigned URL is tested.
+GitHub Pages deployment is configured. After the repository is made public and the first Actions deployment succeeds, the site will be available at: https://farahnazasgharpour1-glitch.github.io/radmehr-group-portfolio/
 
 > The website is a concept/demo project, not an official company website. Project imagery and case studies are presented as design concepts; they do not claim completed construction work or real client commissions.
 
@@ -54,7 +54,7 @@ Because this is a static front-end project, no package installation or build ste
 
 ## Notes
 
-- The contact form uses the Web3Forms client-side endpoint. Test an actual submission after deployment before treating it as production-ready.
+- The contact form uses the Web3Forms client-side endpoint. Test an actual submission after the first successful deployment before treating it as production-ready.
 - The privacy page is written for the demo version and must be reviewed and completed by the site owner before collecting real visitor information.
 - Performance and accessibility should be verified against the final deployed build on real devices.
 
