@@ -1322,3 +1322,128 @@ html[data-theme="light"] .about-principles-section .principle-cards p {
     transition: none;
   }
 }
+
+
+/* About page principles: premium cards aligned with the homepage service tiles. */
+.about-principles-section .principle-cards article {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 220px;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 25px 23px;
+  border: 1px solid rgba(215, 186, 130, .34);
+  border-radius: 17px;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(201, 166, 107, .13), transparent 58%),
+    linear-gradient(145deg, rgba(28, 29, 25, .96), rgba(15, 17, 15, .94));
+  box-shadow: 0 16px 38px rgba(0, 0, 0, .22), inset 0 1px 0 rgba(255, 255, 255, .06);
+  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+}
+.about-principles-section .principle-cards article::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(215, 186, 130, .9), transparent);
+}
+.about-principles-section .principle-cards article::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: auto -44px -76px auto;
+  width: 160px;
+  height: 160px;
+  border: 1px solid rgba(215, 186, 130, .12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 17px rgba(215, 186, 130, .025), 0 0 0 36px rgba(215, 186, 130, .018);
+}
+.about-principles-section .principle-cards article:hover,
+.about-principles-section .principle-cards article:focus-within {
+  transform: translateY(-5px);
+  border-color: rgba(230, 202, 151, .72);
+  box-shadow: 0 22px 46px rgba(0, 0, 0, .28), 0 0 0 1px rgba(215, 186, 130, .08);
+}
+.about-principles-section .principle-cards article > span {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 17px;
+  border: 1px solid rgba(215, 186, 130, .48);
+  border-radius: 13px;
+  background: linear-gradient(145deg, rgba(215, 186, 130, .18), rgba(215, 186, 130, .04));
+  color: #e2c58f;
+  font-size: .82rem;
+  letter-spacing: .08em;
+}
+.about-principles-section .principle-cards h3 {
+  margin: 0 0 9px;
+  color: #f0eee8;
+  font-size: 1.12rem;
+}
+.about-principles-section .principle-cards p {
+  color: #d0cec5;
+  font-size: .91rem;
+  line-height: 2;
+}
+html[data-theme="light"] .about-principles-section .principle-cards article {
+  border-color: rgba(142, 110, 59, .28);
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(177, 143, 88, .16), transparent 58%),
+    linear-gradient(145deg, #fffdf8, #eee6d7);
+  box-shadow: 0 14px 34px rgba(64, 49, 25, .10), inset 0 1px 0 rgba(255, 255, 255, .82);
+}
+html[data-theme="light"] .about-principles-section .principle-cards article::before {
+  background: linear-gradient(90deg, transparent, rgba(142, 110, 59, .72), transparent);
+}
+html[data-theme="light"] .about-principles-section .principle-cards article::after {
+  border-color: rgba(142, 110, 59, .10);
+  box-shadow: 0 0 0 17px rgba(142, 110, 59, .025), 0 0 0 36px rgba(142, 110, 59, .018);
+}
+html[data-theme="light"] .about-principles-section .principle-cards article > span {
+  border-color: rgba(142, 110, 59, .35);
+  background: linear-gradient(145deg, rgba(177, 143, 88, .20), rgba(177, 143, 88, .06));
+  color: #765a30;
+}
+html[data-theme="light"] .about-principles-section .principle-cards h3 { color: #29241d; }
+html[data-theme="light"] .about-principles-section .principle-cards p { color: #655e53; }
+
+/* On phones, service details read top-to-bottom: image, copy, then action. */
+@media (max-width: 760px) {
+  .service-detail {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    padding-block: 28px;
+  }
+  .service-detail > .media-frame,
+  .service-detail:nth-child(even) .media-frame {
+    order: -1;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+  .service-detail .media-frame img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    max-height: 220px;
+    object-fit: cover;
+  }
+  .service-detail__copy { order: 0; }
+  .service-detail h2 { font-size: 1.22rem; }
+  .service-detail p { font-size: .9rem; line-height: 1.95; }
+  .service-detail .outline-link { margin-top: 12px; }
+}
+@media (max-width: 420px) {
+  .service-detail { gap: 14px; padding-block: 23px; }
+  .service-detail .media-frame img { max-height: 190px; aspect-ratio: 16 / 9; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-principles-section .principle-cards article { transition: none; }
+  .about-principles-section .principle-cards article:hover,
+  .about-principles-section .principle-cards article:focus-within { transform: none; }
+}
