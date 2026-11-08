@@ -1447,3 +1447,54 @@ html[data-theme="light"] .about-principles-section .principle-cards p { color: #
   .about-principles-section .principle-cards article:hover,
   .about-principles-section .principle-cards article:focus-within { transform: none; }
 }
+
+
+/* Mobile service detail order: label, image, title, explanation, action. */
+@media (max-width: 760px) {
+  .service-detail {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 14px;
+  }
+
+  /* Let the eyebrow, heading, copy and CTA participate in the article's stack. */
+  .service-detail__copy {
+    display: contents;
+  }
+
+  .service-detail .section-heading__eyebrow {
+    order: 1;
+    margin: 0;
+  }
+
+  .service-detail > .media-frame,
+  .service-detail:nth-child(even) .media-frame {
+    order: 2;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  .service-detail h2 {
+    order: 3;
+    margin: 2px 0 0;
+    font-size: 1.22rem;
+  }
+
+  .service-detail__copy > p:not(.section-heading__eyebrow):not(.service-detail__note) {
+    order: 4;
+    margin: 0;
+  }
+
+  .service-detail__note {
+    order: 5;
+    margin: 0;
+  }
+
+  .service-detail .outline-link {
+    order: 6;
+    justify-self: start;
+    margin-top: 4px;
+  }
+}
