@@ -1,21 +1,10 @@
 @font-face {
   font-family: "Estedad";
-  src: url("../font/Estedad.woff2") format("woff2"),
-       url("../font/Estedad-V0.7\(Beta10\)-AL_p30download.com.woff") format("woff");
+  src: url("../font/Estedad.woff2") format("woff2");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
-
-/* Display typography: pinned upstream variable font; body copy remains Estedad. */
-@font-face {
-  font-family: "Vazirmatn";
-  src: url("../font/Vazirmatn-Variable.woff2") format("woff2");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* =========================
    1. رنگ‌ها و متغیرهای سایت
 ========================= */
@@ -85,27 +74,28 @@ html[data-theme="light"] {
 }
 
 html {
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
   scroll-padding-top: 100px;
 }
 
 body {
   margin: 0;
-  font-family: "Estedad", Tahoma, sans-serif;
+  font-family: Tahoma, Arial, sans-serif;
+  font-synthesis: weight;
   font-size: 16px;
   line-height: 1.8;
   background: var(--bg);
   color: var(--text);
 }
 
-/* Keep Persian headings distinct while preserving Estedad for readable body copy. */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Vazirmatn", "Estedad", Tahoma, sans-serif;
+/* Form controls use the same type system instead of browser-default fonts. */
+button, input, select, textarea {
+  font: inherit;
+}
+
+/* Headings use Estedad; body copy and controls use the system Tahoma stack. */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Estedad", Tahoma, Arial, sans-serif;
 }
 
 /* دسترسی سریع صفحه‌کلید به محتوای اصلی */
@@ -594,7 +584,7 @@ section p {
   max-width: 12ch;
   margin: 0 0 24px;
   color: var(--text);
-  font-size: clamp(2.3rem, 5vw, 4.8rem);
+  font-size: clamp(2.1rem, 4.3vw, 4.2rem);
   font-weight: 800;
   line-height: 1.35;
   letter-spacing: -0.04em;
@@ -878,7 +868,7 @@ section p {
 
   .featured-project__intro h1 {
     max-width: 14ch;
-    font-size: clamp(2rem, 8vw, 3.2rem);
+    font-size: clamp(1.9rem, 6vw, 2.8rem);
     line-height: 1.45;
   }
 
@@ -986,31 +976,8 @@ section p {
   }
 }
 
-/* =========================
-   12. CSS رسمی Lenis 1.3.26
-   هم‌ارز قواعد فایل lenis.css نسخه ثابت‌شده
-========================= */
 
-html.lenis,
-html.lenis body {
-  height: auto;
-}
 
-.lenis:not(.lenis-autoToggle).lenis-stopped {
-  overflow: clip;
-}
-
-.lenis [data-lenis-prevent],
-.lenis [data-lenis-prevent-wheel],
-.lenis [data-lenis-prevent-touch],
-.lenis [data-lenis-prevent-vertical],
-.lenis [data-lenis-prevent-horizontal] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
-}
 /* تصویر عریض برای حرکت افقی در حالت سینمایی */
 
 @media (min-width: 761px) {
@@ -1027,7 +994,6 @@ html.lenis body {
   position: relative;
   isolation: isolate;
 
-  /* این بخش برای انیمیشن پین‌شده دسکتاپ آماده است */
   min-height: 100vh;
   min-height: 100svh;
 
@@ -1155,27 +1121,7 @@ html.lenis body {
   scroll-snap-type: x proximity;
 }
 
-/* فقط در زمان اجرای حرکت خودکار */
-.project-showcase.is-enhanced .project-showcase__viewport {
-  overflow: hidden;
-  scroll-snap-type: none;
-
-  cursor: grab;
-  touch-action: pan-y;
-}
-
-/* ظاهر نشانگر هنگام کشیدن کارت‌ها */
-.project-showcase.is-enhanced.is-dragging
-.project-showcase__viewport {
-  cursor: grabbing;
-  user-select: none;
-}
-
-/* به مرورگر کمک می‌کنیم حرکت فعال را بهینه رندر کند */
-.project-showcase.is-enhanced .project-showcase__track {
-  will-change: transform;
-}
-/* ردیف پنل‌ها؛ بعداً GSAP آن را حرکت می‌دهد */
+/* Native horizontal scrolling; no animation library is required. */
 
 .project-showcase__track {
   display: flex;
@@ -1320,49 +1266,6 @@ html.lenis body {
 .showcase-panel__caption a:hover {
   background: var(--accent-hover);
   transform: translateY(-2px);
-}
-/* کنترل حرکت خودکار گالری */
-
-.project-showcase__motion-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 42px;
-  margin-top: 14px;
-  padding: 9px 16px;
-
-  border: 1px solid var(--border);
-  border-radius: 999px;
-
-  background: var(--surface);
-  color: var(--text);
-
-  font: inherit;
-  font-size: 0.88rem;
-  cursor: pointer;
-
-  transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease;
-}
-
-.project-showcase__motion-toggle:hover {
-  border-color: var(--accent-link);
-  background: var(--surface-2);
-}
-
-.project-showcase__motion-toggle[hidden] {
-  display: none;
-}
-
-/* در موبایل گالری ثابت و عمودی است؛
-   در حالت کاهش حرکت نیز دکمه لازم نیست. */
-@media (max-width: 760px),
-       (prefers-reduced-motion: reduce) {
-  .project-showcase__motion-toggle {
-    display: none;
-  }
 }
 /* =========================================
    RESPONSIVE — TABLET & MOBILE
@@ -1759,7 +1662,7 @@ html.lenis body {
 .about__mark { position: relative; display: grid; place-items: center; width: clamp(130px, 18vw, 220px); aspect-ratio: 1; margin-inline: auto; border: 1px solid var(--accent); border: 1px solid rgba(var(--accent-rgb), .60); border: 1px solid color-mix(in srgb, var(--accent) 60%, transparent); border-radius: 50%; color: var(--accent); }
 .about__mark::before, .about__mark::after { content: ""; position: absolute; inset: 12%; border: 1px solid rgba(var(--accent-rgb), .35); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-radius: 50%; }
 .about__mark::after { inset: 24%; }
-.about__mark span { font-family: Georgia, serif; font-size: clamp(4rem, 8vw, 7rem); font-weight: 400; }
+.about__mark span { font-family: inherit; font-size: clamp(4rem, 8vw, 7rem); font-weight: 400; }
 .about__mark i { position: absolute; right: 8%; bottom: 24%; width: 11px; height: 11px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 8px rgba(var(--accent-rgb), .15); box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 15%, transparent); }
 .about__link { display: inline-flex; align-items: center; gap: 12px; margin-top: 8px; color: var(--light-section-text); font-weight: 700; }
 .about__link:hover { color: var(--accent-link); }
@@ -1917,29 +1820,36 @@ html:not(.js-ready) .project-card__toggle { display:none; }
 .project-card__visual .project-card__toggle,
 .project-card.is-open .project-card__visual .project-card__toggle {
   position: absolute;
-  left: 50%;
-  right: auto;
+  left: 0;
+  right: 0;
   bottom: 2px;
   z-index: 4;
   display: inline-flex;
   width: max-content;
   max-width: calc(100% - 24px);
   min-height: 42px;
-  margin: 0;
+  margin: 0 auto;
   padding: 8px 16px;
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  transform: translateX(-50%);
+  transform: none;
   border-color: rgba(232, 202, 148, .88);
-  background: rgba(7, 9, 7, .97);
-  color: #f8f0df;
+  background: #080908;
+  color: #fff8e9;
+  opacity: 1;
+  filter: none;
+  -webkit-filter: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  text-shadow: none;
+  font-weight: 700;
   box-shadow: 0 7px 22px rgba(0, 0, 0, .32);
 }
 
 .project-card__visual .project-card__toggle:hover,
 .project-card.is-open .project-card__visual .project-card__toggle:hover {
-  transform: translateX(-50%);
+  transform: none;
   border-color: #f0d39c;
   background: #292116;
 }
@@ -2090,7 +2000,7 @@ html:not(.js-ready) .project-card__toggle { display:none; }
     grid-row: 2;
     max-width: 15ch;
     margin: 0;
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: clamp(1.75rem, 6.5vw, 2.4rem);
     line-height: 1.38;
   }
 
@@ -2254,4 +2164,416 @@ html:not(.js-ready) .project-card__toggle { display:none; }
     font-size: .88rem;
     line-height: 1.8;
   }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+
+/* Final accessibility and responsive refinements */
+img, svg, video { max-width: 100%; }
+img { height: auto; }
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 3px solid var(--accent-link);
+  outline-offset: 3px;
+}
+@media (pointer: coarse) {
+  .nav-toggle, .theme-toggle { min-width: 44px; min-height: 44px; }
+  .main-nav a { min-height: 44px; }
+  .site-footer__bottom a {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 44px; min-height: 44px; padding: 8px;
+  }
+  .contact-form__submit, .contact-cta { min-height: 48px; }
+}
+@media (max-width: 360px) {
+  .site-header .container { gap: 6px; }
+  .brand { max-width: calc(100% - 96px); }
+  .brand img { width: clamp(118px, 40vw, 142px); }
+  .theme-toggle, .nav-toggle { width: 44px; height: 44px; flex-basis: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* Comfortable touch targets for footer navigation on phones and tablets. */
+@media (pointer: coarse) {
+  .site-footer__column a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-block: 6px;
+  }
+  .project-card__toggle {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+
+/* Cinematic hero image: continuous, subtle movement on desktop and mobile. */
+@media (prefers-reduced-motion: no-preference) {
+  .featured-project__visual img {
+    transform-origin: 50% 50%;
+    animation: radmehr-cinematic-drift 22s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  @keyframes radmehr-cinematic-drift {
+    from { transform: scale(1.045) translate3d(0, 0, 0); }
+    to { transform: scale(1.12) translate3d(-1.1%, .45%, 0); }
+  }
+
+  /* Scroll reveals affect position only; text and images are never hidden. */
+  .reveal-in {
+    animation: radmehr-soft-rise .52s cubic-bezier(.2, .75, .25, 1);
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+
+  @keyframes radmehr-soft-rise {
+    from { transform: translate3d(0, 14px, 0); }
+    to { transform: translate3d(0, 0, 0); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-project__visual img {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
+  .reveal-in {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+
+/* Stronger cinematic camera movement on the featured architectural image. */
+@media (prefers-reduced-motion: no-preference) {
+  .featured-project__visual img {
+    width: 130% !important;
+    max-width: none;
+    height: 100%;
+    transform-origin: 50% 50%;
+    animation: radmehr-cinematic-pan 28s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  @keyframes radmehr-cinematic-pan {
+    0% { transform: translate3d(0, 0, 0) scale(1.05); }
+    50% { transform: translate3d(-5%, -.35%, 0) scale(1.14); }
+    100% { transform: translate3d(-10%, .55%, 0) scale(1.20); }
+  }
+
+  .reveal-in {
+    animation: radmehr-soft-rise .52s cubic-bezier(.2, .75, .25, 1);
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+
+  @keyframes radmehr-soft-rise {
+    from { transform: translate3d(0, 14px, 0); }
+    to { transform: translate3d(0, 0, 0); }
+  }
+
+  .about__mark {
+    box-shadow:
+      0 0 0 8px rgba(201, 166, 107, .09),
+      0 0 0 17px rgba(201, 166, 107, .055),
+      0 0 28px rgba(201, 166, 107, .18),
+      inset 0 0 24px rgba(201, 166, 107, .08);
+  }
+
+  .about__mark::before {
+    inset: 10%;
+    border: 1.5px solid rgba(201, 166, 107, .72);
+    box-shadow: 0 0 13px rgba(201, 166, 107, .12);
+  }
+
+  .about__mark::after {
+    inset: 23%;
+    border: 1px dashed rgba(201, 166, 107, .62);
+  }
+
+  .about__mark > span {
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 0 24px rgba(201, 166, 107, .20);
+  }
+
+  .about__mark > i {
+    z-index: 3;
+    box-shadow:
+      0 0 0 7px rgba(201, 166, 107, .16),
+      0 0 18px rgba(201, 166, 107, .55);
+  }
+}
+
+.project-showcase__autoplay-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 42px;
+  margin-top: 16px;
+  padding: 8px 17px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--accent-link);
+  font: inherit;
+  font-size: .88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.project-showcase__autoplay-toggle:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.project-showcase__autoplay-toggle:focus-visible {
+  outline: 3px solid var(--accent-link);
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .featured-project__visual img {
+    width: 130% !important;
+  }
+
+  .project-showcase__autoplay-toggle {
+    min-height: 44px;
+    margin-top: 12px;
+    font-size: .84rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-project__visual img {
+    animation: none !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100%;
+    will-change: auto;
+  }
+  .reveal-in {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+
+/* Cinematic architectural hero: clean image, soft grading and no decorative frame. */
+.featured-project__visual {
+  isolation: isolate;
+  border: 0;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, .34);
+}
+.featured-project__visual img {
+  filter: saturate(.84) contrast(1.07);
+}
+/* The image itself stays cinematic; no inset gold frame. */
+.featured-project__visual::before {
+  display: none;
+}
+.featured-project__visual::after {
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7, 9, 8, .08) 0%, transparent 34%, rgba(7, 9, 8, .78) 100%),
+    linear-gradient(90deg, rgba(7, 9, 8, .16), transparent 28%, transparent 72%, rgba(7, 9, 8, .18)),
+    radial-gradient(ellipse at 50% 45%, transparent 42%, rgba(5, 7, 6, .28) 100%);
+}
+.featured-project__caption {
+  z-index: 3;
+  padding-top: 0;
+  border-top: 0;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .55);
+}
+.featured-project__caption span:first-child {
+  direction: rtl;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+@media (max-width: 760px) {
+  .featured-project__caption {
+    padding-top: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .featured-project__visual img { filter: none; }
+}
+
+/* Mobile gallery remains horizontal so automatic progression works on every screen. */
+@media (max-width: 760px) {
+  .project-showcase__viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 2px;
+  }
+  .project-showcase__viewport::-webkit-scrollbar { display: none; }
+  .project-showcase__track {
+    width: max-content;
+    flex-direction: row;
+    gap: 14px;
+  }
+  .showcase-panel,
+  .showcase-panel--image {
+    flex: 0 0 min(86vw, 540px);
+    width: min(86vw, 540px);
+    height: clamp(340px, 78vw, 420px);
+    min-height: 0;
+    aspect-ratio: auto;
+    scroll-snap-align: start;
+  }
+  .showcase-panel__caption {
+    inset-inline: 18px;
+    bottom: 18px;
+  }
+}
+@media (max-width: 420px) {
+  .showcase-panel,
+  .showcase-panel--image {
+    flex-basis: 88vw;
+    width: 88vw;
+    height: 350px;
+  }
+}
+
+
+/* Final gallery presentation and marquee behavior. */
+.featured-project__visual {
+  border: 1px solid var(--border);
+}
+.project-showcase__viewport {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.project-showcase__viewport::-webkit-scrollbar {
+  display: none;
+}
+.project-showcase.is-enhanced .project-showcase__viewport {
+  overflow: hidden;
+  scroll-snap-type: none;
+  touch-action: pan-y;
+}
+.project-showcase.is-enhanced .project-showcase__track {
+  will-change: transform;
+}
+.project-showcase.is-enhanced .showcase-panel {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+/* The third source image contains a thin white strip at its top edge. */
+.showcase-panel:nth-child(3) > img {
+  transform: scale(1.04);
+  transform-origin: center center;
+}
+
+/* Respect the hidden state of the gallery control. */
+.project-showcase__autoplay-toggle[hidden] {
+  display: none !important;
+}
+
+
+/* Refined visual balance for the homepage architecture showcase. */
+.project-showcase {
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(196, 168, 117, .13), transparent 38rem),
+    radial-gradient(ellipse at 92% 100%, rgba(196, 168, 117, .055), transparent 42rem),
+    linear-gradient(135deg, #171614 0%, #211e19 52%, #171614 100%);
+}
+
+html[data-theme="light"] .project-showcase {
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(142, 110, 59, .13), transparent 38rem),
+    radial-gradient(ellipse at 92% 100%, rgba(142, 110, 59, .055), transparent 42rem),
+    linear-gradient(135deg, #f3efe7 0%, #e9e2d7 52%, #f3efe7 100%);
+  border-block-color: rgba(142, 110, 59, .24);
+}
+
+/* Desktop gallery cards: a slightly shorter 16:10-like editorial frame. */
+@media (min-width: 761px) {
+  .showcase-panel,
+  .showcase-panel--image {
+    height: clamp(420px, 50vh, 480px);
+    height: clamp(420px, 50svh, 480px);
+  }
+}
+
+/* The hero keeps its outer edge, with the same soft top glint as the service cards. */
+.featured-project__visual {
+  border: 1px solid rgba(212, 180, 122, .34);
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, .34),
+    inset 0 1px 0 rgba(255, 255, 255, .12),
+    0 0 0 1px rgba(212, 180, 122, .055);
+}
+html[data-theme="light"] .featured-project__visual {
+  border-color: rgba(142, 110, 59, .34);
+  box-shadow:
+    0 24px 48px rgba(64, 49, 25, .14),
+    inset 0 1px 0 rgba(255, 255, 255, .78),
+    0 0 0 1px rgba(142, 110, 59, .05);
+}
+
+/* Final typography refinement: keep Estedad, reduce visual heaviness. */
+section h2,
+.site-footer__column h2,
+.site-footer__contact h2 {
+  font-weight: 600;
+}
+
+.featured-project__intro h1,
+.project-showcase__heading h2,
+.showcase-panel__caption h3 {
+  font-weight: 700;
+}
+
+button,
+.featured-project__link,
+.contact-cta,
+.showcase-panel__caption a,
+.about__link,
+.contact__button {
+  font-weight: 600;
+}
+
+/* Final button typography refinement: lighter labels across the site. */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+a.header-cta,
+a.text-link,
+a.outline-link,
+a.service-accordion__link,
+a.thank-you-action,
+a.featured-project__link,
+a.contact-cta,
+a.contact__button,
+a.about__link,
+a.site-footer__cta,
+.project-card__toggle,
+.project-showcase__autoplay-toggle,
+.contact-form__submit,
+.service-accordion__toggle,
+.home-services .section-action .outline-link,
+.services-picker .service-accordion__link {
+  font-weight: 500 !important;
 }

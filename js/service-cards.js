@@ -1,140 +1,68 @@
-/* Expandable premium service cards with graceful fallbacks. */
-(() => {
-  "use strict";
+"use strict";
 
+(() => {
   const grid = document.querySelector(".service-grid--accordion");
   if (!grid) return;
 
+  const serviceIds = new Set([
+    "architecture", "interior", "facade", "construction",
+    "renovation", "management", "landscape"
+  ]);
   const cards = Array.from(grid.querySelectorAll(".service-accordion"));
-  const gsap = window.gsap;
-  const ScrollTrigger = window.ScrollTrigger;
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  if (gsap && ScrollTrigger) {
-    gsap.registerPlugin(ScrollTrigger);
-
-    if (!reduceMotion) {
-      const motion = gsap.matchMedia();
-      motion.add(
-        {
-          desktop: "(min-width: 761px)",
-          mobile: "(max-width: 760px)",
-          reduceMotion: "(prefers-reduced-motion: reduce)"
-        },
-        (context) => {
-          const { desktop, mobile, reduceMotion: prefersLessMotion } = context.conditions;
-          if (prefersLessMotion) return;
-
-          cards.forEach((card, index) => {
-            gsap.fromTo(
-              card,
-              { autoAlpha: 0, y: mobile ? 16 : 26 },
-              {
-                autoAlpha: 1,
-                y: 0,
-                duration: desktop ? 0.68 : 0.48,
-                delay: (index % (desktop ? 3 : 2)) * 0.055,
-                ease: "power3.out",
-                clearProps: "transform,opacity,visibility",
-                scrollTrigger: {
-                  trigger: card,
-                  start: "top 88%",
-                  once: true
-                }
-              }
-            );
-          });
-        }
-      );
-    }
-  }
-
-  function setExpandedState(card, expanded) {
+  function updateSummary(card) {
     const summary = card.querySelector(".service-accordion__summary");
-    if (summary) summary.setAttribute("aria-expanded", String(expanded));
-  }
-
-  function openCard(card) {
-    const panel = card.querySelector(".service-accordion__panel");
-    card.open = true;
-    setExpandedState(card, true);
-    if (!panel || !gsap || reduceMotion) return;
-
-    card.dataset.animating = "true";
-    gsap.killTweensOf(panel);
-    gsap.fromTo(
-      panel,
-      { height: 0, autoAlpha: 0, y: -9 },
-      {
-        height: "auto",
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.48,
-        ease: "power3.out",
-        onComplete: () => {
-          gsap.set(panel, { clearProps: "height,opacity,visibility,transform" });
-          delete card.dataset.animating;
-          if (ScrollTrigger) ScrollTrigger.refresh();
-        }
-      }
-    );
-  }
-
-  function closeCard(card) {
-    const panel = card.querySelector(".service-accordion__panel");
-    if (!card.open) return;
-    if (!panel || !gsap || reduceMotion) {
-      card.open = false;
-      setExpandedState(card, false);
-      return;
-    }
-
-    card.dataset.animating = "true";
-    gsap.killTweensOf(panel);
-    gsap.to(panel, {
-      height: 0,
-      autoAlpha: 0,
-      y: -7,
-      duration: 0.3,
-      ease: "power2.in",
-      onComplete: () => {
-        card.open = false;
-        setExpandedState(card, false);
-        delete card.dataset.animating;
-        if (ScrollTrigger) ScrollTrigger.refresh();
-      }
-    });
+    if (summary) summary.setAttribute("aria-expanded", String(card.open));
   }
 
   cards.forEach((card) => {
-    const summary = card.querySelector(".service-accordion__summary");
-    if (!summary) return;
-    setExpandedState(card, card.open);
-
-    // Keep native <details> behavior as the fallback when this script is unavailable.
-    summary.addEventListener("click", (event) => {
-      event.preventDefault();
-      if (card.dataset.animating === "true") return;
-
+    card.addEventListener("toggle", () => {
+      updateSummary(card);
       if (card.open) {
-        closeCard(card);
-        return;
-      }
-
-      cards.forEach((otherCard) => {
-        if (otherCard !== card && otherCard.open) {
-          closeCard(otherCard);
-        }
-      });
-      openCard(card);
-    });
-
-    summary.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && card.open) {
-        event.preventDefault();
-        closeCard(card);
-        summary.focus();
+        cards.forEach((other) => {
+          if (other !== card && other.open) other.open = false;
+        });
       }
     });
+    updateSummary(card);
   });
+
+  function scrollTo(target) {
+    if (!target) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.requestAnimationFrame(() => target.scrollIntoView({
+      block: "start",
+      behavior: reduceMotion ? "auto" : "smooth"
+    }));
+  }
+
+  function syncServiceHash() {
+    let hash;
+    try {
+      hash = decodeURIComponent(window.location.hash.slice(1));
+    } catch (_) {
+      return;
+    }
+    if (!hash) return;
+
+    // Links to the detailed copy should always land on that copy.
+    if (hash.startsWith("service-details-")) {
+      scrollTo(document.getElementById(hash));
+      return;
+    }
+
+    // Legacy service hashes open the relevant accordion and bring it into view.
+    if (!serviceIds.has(hash)) return;
+    const targetCard = document.getElementById(`service-card-${hash}`);
+    if (!targetCard || !grid.contains(targetCard)) return;
+
+    cards.forEach((card) => {
+      card.open = card === targetCard;
+      updateSummary(card);
+    });
+    scrollTo(targetCard);
+  }
+
+  if (window.location.hash) syncServiceHash();
+  window.addEventListener("hashchange", syncServiceHash);
 })();

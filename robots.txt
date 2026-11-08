@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://radmehr-group-demo.onrender.com/sitemap.xml

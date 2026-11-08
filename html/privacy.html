@@ -1,64 +1,83 @@
-<!doctype html>
-<html lang="fa" dir="rtl" data-theme="dark">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>حریم خصوصی | رادمهر گروپ</title>
-  <meta name="description" content="توضیح اولیه درباره اطلاعات دریافت‌شده در فرم تماس و نحوه استفاده از آن‌ها در وب‌سایت رادمهر گروپ.">
+<!DOCTYPE html>
 
-  <meta name="theme-color" content="#111310">
-  <meta property="og:locale" content="fa_IR">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="حریم خصوصی | رادمهر گروپ">
-  <meta property="og:description" content="توضیح اولیه درباره اطلاعات دریافت‌شده در فرم تماس و نحوه استفاده از آن‌ها در وب‌سایت رادمهر گروپ.">
-  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
-  <!-- پس از تعیین دامنه نهایی، canonical و og:url و og:image با نشانی مطلق واقعی اضافه شوند. -->
-  <script src="../js/theme-init.js" defer></script>
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/site-pages.css">
+<html data-theme="dark" dir="rtl" lang="fa">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link as="font" crossorigin="" href="../font/Estedad.woff2" rel="preload" type="font/woff2"/>
+<title>حریم خصوصی | رادمهر گروپ</title>
+<meta content="توضیح اولیه درباره اطلاعات دریافت‌شده در فرم تماس و نحوه استفاده از آن‌ها در وب‌سایت رادمهر گروپ." name="description"/>
+<meta content="#111310" name="theme-color"/>
+<meta content="fa_IR" property="og:locale"/>
+<meta content="website" property="og:type"/>
+<meta content="حریم خصوصی | رادمهر گروپ" property="og:title"/>
+<meta content="توضیح اولیه درباره اطلاعات دریافت‌شده در فرم تماس و نحوه استفاده از آن‌ها در وب‌سایت رادمهر گروپ." property="og:description"/>
+<link href="../images/favicon.svg" rel="icon" type="image/svg+xml"/>
+<meta content="https://radmehr-group-demo.onrender.com/html/privacy.html" property="og:url"/>
+<meta content="https://radmehr-group-demo.onrender.com/images/radmehr-luxury-residential-960.webp" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<script>
+(() => {
+  const root = document.documentElement;
+  let theme = "dark";
+  try {
+    const saved = localStorage.getItem("radmehr-theme");
+    theme = saved === "light" || saved === "dark"
+      ? saved
+      : (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+  } catch (_) {
+    // Keep a stable dark theme when storage or matchMedia is unavailable.
+  }
+  root.dataset.theme = theme;
+  root.style.colorScheme = theme;
+})();
+</script>
+<link href="../css/style.css" rel="stylesheet"/>
+<link href="../css/site-pages.css" rel="stylesheet"/>
+<meta content="noindex,follow" name="robots"/>
 </head>
 <body id="top">
 <a class="skip-link" href="#main-content">رفتن به محتوای اصلی</a>
 <header class="site-header">
-  <div class="container">
-    <a class="brand" href="index.html#home" aria-label="رادمهر گروپ، صفحه اصلی">
-      <img src="../images/radmehr-logo-horizontal-gold.svg" alt="رادمهر گروپ" width="390" height="100">
-    </a>
-    <nav class="main-nav" id="main-nav" aria-label="منوی اصلی">
-      <ul>
-        <li><a href="index.html#home">خانه</a></li>
-        <li><a href="about.html">درباره ما</a></li>
-        <li><a href="services.html">خدمات</a></li>
-        <li><a href="projects.html">پروژه‌ها</a></li>
-        <li><a href="contact.html">تماس با ما</a></li>
-      </ul>
-    </nav>
-    <a class="header-cta" href="contact.html">درخواست مشاوره</a>
-    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="تغییر به حالت روشن">
-      <span class="theme-toggle__icon" aria-hidden="true">☼</span><span id="theme-toggle-label">حالت روشن</span>
-    </button>
-    <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="باز کردن منو">
-      <span class="nav-toggle__line"></span><span class="nav-toggle__line"></span><span class="nav-toggle__line"></span>
-    </button>
-  </div>
+<div class="container">
+<a aria-label="رادمهر گروپ، صفحه اصلی" class="brand" href="/#home">
+<img alt="رادمهر گروپ" data-dark-src="../images/radmehr-logo-horizontal-gold.svg" data-light-src="../images/radmehr-logo-horizontal-dark.svg" height="100" src="../images/radmehr-logo-horizontal-gold.svg" width="390"/>
+</a>
+<nav aria-label="منوی اصلی" class="main-nav" id="main-nav">
+<ul>
+<li><a href="/#home">خانه</a></li>
+<li><a href="about.html">درباره ما</a></li>
+<li><a href="services.html">خدمات</a></li>
+<li><a href="projects.html">پروژه‌ها</a></li>
+<li><a href="contact.html">تماس با ما</a></li>
+</ul>
+</nav>
+<a class="header-cta" href="contact.html">درخواست مشاوره</a>
+<button aria-label="تغییر به حالت روشن" class="theme-toggle" id="theme-toggle" type="button">
+<span aria-hidden="true" class="theme-toggle__icon">☼</span><span id="theme-toggle-label">حالت روشن</span>
+</button>
+<button aria-controls="main-nav" aria-expanded="false" aria-label="باز کردن منو" class="nav-toggle" id="nav-toggle" type="button">
+<span class="nav-toggle__line"></span><span class="nav-toggle__line"></span><span class="nav-toggle__line"></span>
+</button>
+</div>
 </header>
 <main id="main-content">
-<section class="page-hero"><div class="container"><nav class="breadcrumbs" aria-label="مسیر صفحه"><ol><li><a href="index.html">خانه</a></li><li aria-current="page">حریم خصوصی</li></ol></nav><p class="page-kicker">شفافیت در ارتباط</p><h1>حریم خصوصی</h1><p class="page-lead">این صفحه توضیح می‌دهد اطلاعاتی که از طریق فرم تماس ارسال می‌کنید، در چه چارچوبی دریافت و برای پیگیری درخواست استفاده می‌شود.</p></div></section>
-<section class="content-section"><div class="container legal-content"><p><strong>وضعیت سند:</strong> پیش‌نویس اولیه برای نمونه‌کار. پیش از انتشار عمومی و دریافت اطلاعات واقعی کاربران، باید مشخصات مالک/مسئول پردازش، اطلاعات تماس، مبنای قانونی و دوره نگهداری داده‌ها توسط مسئول واقعی سایت بازبینی و تکمیل شود.</p><h2>چه اطلاعاتی دریافت می‌شود؟</h2><p>فرم تماس ممکن است نام، شماره تلفن، ایمیل اختیاری، موضوع درخواست و متن پیام را دریافت کند. لطفاً اطلاعات حساس یا غیرضروری را در متن پیام وارد نکنید.</p><h2>هدف استفاده از اطلاعات</h2><p>اطلاعات برای دریافت، بررسی و پاسخ‌گویی به درخواست ارسالی استفاده می‌شود. از داده‌های فرم نباید برای هدف دیگری بدون اطلاع‌رسانی و مجوز لازم استفاده شود.</p><h2>سرویس پردازش فرم</h2><p>در پیکربندی فعلی، فرم برای پردازش درخواست به سرویس Web3Forms ارسال می‌شود. هنگام انتشار واقعی باید شرایط، سیاست حریم خصوصی، محل پردازش و تعهدات قراردادی این سرویس بررسی شود و متن این صفحه با تنظیمات واقعی هماهنگ گردد.</p><h2>نگهداری و دسترسی</h2><p>دوره نگهداری پیام‌ها، افراد مجاز به مشاهده و روش حذف آن‌ها باید توسط مالک واقعی سایت تعیین و در این قسمت ثبت شود. این نسخه درباره مدت نگهداری یا محل ذخیره‌سازی ادعای تأییدنشده‌ای نمی‌کند.</p><h2>درخواست‌های مربوط به داده‌ها</h2><p>پیش از انتشار عمومی، ایمیل یا راه ارتباطی معتبر مسئول رسیدگی به درخواست دسترسی، اصلاح یا حذف اطلاعات باید در این صفحه درج شود.</p><h2>به‌روزرسانی این متن</h2><p>در صورت تغییر سرویس فرم، شیوه استفاده از داده‌ها یا قوانین قابل اعمال، این صفحه باید بازبینی و تاریخ آخرین به‌روزرسانی آن درج شود.</p><p class="legal-placeholder">موارد تکمیل پیش از انتشار: نام حقوقی مسئول سایت، نشانی یا کشور محل استقرار مسئول، ایمیل تماس، مبنای قانونی پردازش، دوره نگهداری، حقوق کاربران و جزئیات قرارداد سرویس فرم.</p></div></section>
+<section class="page-hero"><div class="container"><nav aria-label="مسیر صفحه" class="breadcrumbs"><ol><li><a href="/">خانه</a></li><li aria-current="page">حریم خصوصی</li></ol></nav><p class="page-kicker">شفافیت در ارتباط</p><h1>حریم خصوصی</h1><p class="page-lead">این صفحه توضیح می‌دهد اطلاعاتی که از طریق فرم تماس ارسال می‌کنید، در چه چارچوبی دریافت و برای پیگیری درخواست استفاده می‌شود.</p></div></section>
+<section class="content-section"><div class="container legal-content"><p class="privacy-notice-status">این اطلاعیه برای نسخه نمایشی وب‌سایت تهیه شده است. پیش از دریافت اطلاعات واقعی در محیط عملیاتی، مالک سایت باید نام و راه تماس مسئول پردازش، مبنای قانونی، دوره نگهداری پیام‌ها و رویه پاسخ‌گویی به درخواست‌های کاربران را تکمیل و متن را با الزامات محل فعالیت خود تطبیق دهد.</p><h2>چه اطلاعاتی دریافت می‌شود؟</h2><p>در صورت ارسال فرم تماس، اطلاعاتی که وارد می‌کنید شامل نام، شماره تماس، نشانی ایمیل اختیاری، موضوع درخواست و متن پیام دریافت می‌شود. لطفاً اطلاعات حساس، اطلاعات پرداخت یا داده‌هایی را که برای پاسخ‌گویی لازم نیست در فرم ننویسید.</p><h2>هدف استفاده از اطلاعات</h2><p>اطلاعات فرم برای دریافت درخواست، بررسی موضوع و پاسخ‌گویی به شما استفاده می‌شود. استفاده از این اطلاعات برای هدف دیگری باید پیش از آن به‌روشنی اطلاع‌رسانی و بر مبنای مجاز انجام شود.</p><h2>پردازش فرم توسط Web3Forms</h2><p>فرم این نسخه برای پردازش درخواست و انتقال آن به مقصد ایمیلی پیکربندی‌شده از سرویس شخص ثالث Web3Forms استفاده می‌کند. بنابراین داده‌هایی که در فرم وارد می‌کنید ممکن است از طریق زیرساخت و ارائه‌دهندگان خدمات این شرکت پردازش شوند.</p><p>در زمان تهیه این نسخه، مطالب رسمی Web3Forms درباره نگهداری داده‌ها یکسان نیستند: صفحه پرسش‌های متداول می‌گوید محتوای ارسال‌های فرم را ذخیره نمی‌کنند و گزارش‌های فنی را دوره‌ای حذف می‌کنند؛ اما سیاست حریم خصوصی با تاریخ به‌روزرسانی ۱۳ ژوئیه ۲۰۲۶ از نگهداری داده فرم تا حداکثر سه سال (با امکان دوره کوتاه‌تر) سخن می‌گوید و به پردازش توسط زیرپردازنده‌ها و انتقال بین‌المللی اشاره می‌کند. به همین دلیل در این اطلاعیه مدت نگهداری یا محل واحدی برای پردازش تضمین نمی‌شود. مسئول سایت باید پیش از استفاده عملیاتی، متن جاری سیاست، توافق‌نامه پردازش داده، طرح حساب و تنظیمات واقعی فرم را بررسی و اطلاعات دقیق را به این صفحه اضافه کند. <a href="https://web3forms.com/privacy" rel="noopener noreferrer" target="_blank">سیاست حریم خصوصی Web3Forms</a> · <a href="https://docs.web3forms.com/getting-started/faq" rel="noopener noreferrer" target="_blank">پرسش‌های متداول Web3Forms</a></p><h2>دسترسی، نگهداری و انتقال</h2><p>پس از ارسال، پیام به مقصد ایمیلی پیکربندی‌شده برای فرم منتقل می‌شود. دسترسی به صندوق ایمیل، مدت نگهداری پیام، نسخه‌های پشتیبان و حذف آن‌ها تحت کنترل مالک صندوق و ارائه‌دهنده ایمیل نیز قرار دارد؛ این موارد باید توسط مسئول واقعی سایت تعیین و ثبت شوند.</p><h2>درخواست‌های مربوط به اطلاعات</h2><p>برای درخواست دسترسی، اصلاح یا حذف اطلاعات، باید راه ارتباطی معتبر مسئول سایت در این صفحه درج شود. این اطلاعات در فایل منبع ارائه نشده است و عمداً نشانی یا نامی حدس زده نشده است.</p><h2>به‌روزرسانی</h2><p>این اطلاعیه باید در صورت تغییر فیلدهای فرم، سرویس پردازش، مقصد ایمیل، دوره نگهداری یا قوانین قابل اعمال بازبینی شود. تاریخ آخرین بازبینی پس از تأیید مالک سایت درج خواهد شد.</p></div></section>
 </main>
-<footer class="site-footer" aria-label="پاورقی سایت">
-  <div class="container site-footer__main">
-    <div class="site-footer__brand">
-      <a class="site-footer__logo" href="index.html#home" aria-label="رادمهر گروپ، صفحه اصلی"><img src="../images/radmehr-logo-horizontal-light.svg" alt="رادمهر گروپ" width="260" height="67" loading="lazy" decoding="async"></a>
-      <p>معماری با نگاهی دقیق به نور، متریال و کیفیت تجربه فضا؛ از ایده تا فضایی ماندگار.</p>
-    </div>
-    <div class="site-footer__column"><h2>دسترسی سریع</h2><a href="index.html#home">صفحه اصلی</a><a href="about.html">درباره ما</a><a href="services.html">خدمات</a><a href="projects.html">پروژه‌ها</a><a href="contact.html">تماس با ما</a></div>
-    <div class="site-footer__column"><h2>حوزه‌های فعالیت</h2><a href="services.html#architecture">طراحی معماری</a><a href="services.html#interior">طراحی داخلی</a><a href="services.html#facade">طراحی نما</a><a href="services.html#construction">ساخت و اجرا</a><a href="services.html#landscape">طراحی محوطه</a></div>
-    <div class="site-footer__contact"><p class="site-footer__eyebrow">گام بعدی از اینجا شروع می‌شود</p><h2>ایده‌ای برای فضای بعدی‌تان دارید؟</h2><p>برای مطرح‌کردن پرسش یا درخواست مشاوره، از صفحه تماس استفاده کنید.</p><a class="site-footer__cta" href="contact.html">شروع گفت‌وگو <span aria-hidden="true">↗</span></a></div>
-  </div>
-  <div class="container site-footer__bottom"><p>© <span id="footer-year">2026</span> رادمهر گروپ</p><a href="privacy.html">حریم خصوصی</a><a href="#top" data-scroll-top>بازگشت به بالا ↑</a><span class="site-footer__signature">طراحی‌شده با توجه به جزئیات</span></div>
+<footer aria-label="پاورقی سایت" class="site-footer">
+<div class="container site-footer__main">
+<div class="site-footer__brand">
+<a aria-label="رادمهر گروپ، صفحه اصلی" class="site-footer__logo" href="/#home"><img alt="رادمهر گروپ" decoding="async" height="67" loading="lazy" src="../images/radmehr-logo-horizontal-light.svg" width="260"/></a>
+<p>معماری با نگاهی دقیق به نور، متریال و کیفیت تجربه فضا؛ از ایده تا فضایی ماندگار.</p>
+</div>
+<div class="site-footer__column"><h2>دسترسی سریع</h2><a href="/#home">صفحه اصلی</a><a href="about.html">درباره ما</a><a href="services.html">خدمات</a><a href="projects.html">پروژه‌ها</a><a href="contact.html">تماس با ما</a></div>
+<div class="site-footer__column"><h2>حوزه‌های فعالیت</h2><a href="services.html#architecture">طراحی معماری</a><a href="services.html#interior">طراحی داخلی</a><a href="services.html#facade">طراحی نما</a><a href="services.html#construction">ساخت و اجرا</a><a href="services.html#landscape">طراحی محوطه</a></div>
+<div class="site-footer__contact"><p class="site-footer__eyebrow">گام بعدی از اینجا شروع می‌شود</p><h2>ایده‌ای برای فضای بعدی‌تان دارید؟</h2><p>برای مطرح‌کردن پرسش یا درخواست مشاوره، از صفحه تماس استفاده کنید.</p><a class="site-footer__cta" href="contact.html">شروع گفت‌وگو <span aria-hidden="true">↗</span></a></div>
+</div>
+<div class="container site-footer__bottom"><p>© <span id="footer-year">2026</span> رادمهر گروپ</p><a href="privacy.html">حریم خصوصی</a><a data-scroll-top="" href="#top">بازگشت به بالا ↑</a><span class="site-footer__signature">طراحی‌شده با توجه به جزئیات</span></div>
 </footer>
-<script src="../js/main.js" defer></script>
-<script src="../js/site-pages.js" defer></script>
+<script defer="" src="../js/main.js"></script>
+<script defer="" src="../js/site-pages.js"></script>
 </body>
 </html>

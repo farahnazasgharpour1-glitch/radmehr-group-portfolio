@@ -12,9 +12,25 @@
 <meta content="website" property="og:type"/>
 <meta content="صفحه پیدا نشد | رادمهر گروپ" property="og:title"/>
 <meta content="صفحه موردنظر پیدا نشد. از اینجا به صفحه اصلی یا پروژه‌های رادمهر گروپ بازگردید." property="og:description"/>
+<link rel="preload" href="/font/Estedad.woff2" as="font" type="font/woff2" crossorigin>
 <link href="/images/favicon.svg" rel="icon" type="image/svg+xml"/>
-<!-- پس از تعیین دامنه نهایی، canonical و og:url و og:image با نشانی مطلق واقعی اضافه شوند. -->
-<script defer="" src="/js/theme-init.js"></script>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  let theme = "dark";
+  try {
+    const saved = localStorage.getItem("radmehr-theme");
+    theme = saved === "light" || saved === "dark"
+      ? saved
+      : (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+  } catch (_) {
+    // Keep a stable dark theme when storage or matchMedia is unavailable.
+  }
+  root.dataset.theme = theme;
+  root.style.colorScheme = theme;
+})();
+</script>
 <link href="/css/style.css" rel="stylesheet"/>
 <link href="/css/site-pages.css" rel="stylesheet"/>
 </head>
@@ -22,12 +38,12 @@
 <a class="skip-link" href="#main-content">رفتن به محتوای اصلی</a>
 <header class="site-header">
 <div class="container">
-<a aria-label="رادمهر گروپ، صفحه اصلی" class="brand" href="/html/index.html#home">
-<img alt="رادمهر گروپ" height="100" src="/images/radmehr-logo-horizontal-gold.svg" width="390"/>
+<a aria-label="رادمهر گروپ، صفحه اصلی" class="brand" href="/#home">
+<img alt="رادمهر گروپ" data-dark-src="/images/radmehr-logo-horizontal-gold.svg" data-light-src="/images/radmehr-logo-horizontal-dark.svg" height="100" src="/images/radmehr-logo-horizontal-gold.svg" width="390"/>
 </a>
 <nav aria-label="منوی اصلی" class="main-nav" id="main-nav">
 <ul>
-<li><a href="/html/index.html#home">خانه</a></li>
+<li><a href="/#home">خانه</a></li>
 <li><a href="/html/about.html">درباره ما</a></li>
 <li><a href="/html/services.html">خدمات</a></li>
 <li><a href="/html/projects.html">پروژه‌ها</a></li>
@@ -44,15 +60,15 @@
 </div>
 </header>
 <main id="main-content">
-<section class="not-found"><div class="container"><p class="page-kicker">خطای 404</p><h1>این صفحه پیدا نشد.</h1><p class="page-lead">ممکن است نشانی تغییر کرده باشد یا صفحه‌ای که به دنبال آن هستید وجود نداشته باشد.</p><div class="not-found__actions"><a class="contact__button" href="/html/index.html">بازگشت به صفحه اصلی ↗</a><a class="outline-link" href="/html/projects.html">مشاهده پروژه‌ها</a></div></div></section>
+<section class="not-found"><div class="container"><p class="page-kicker">خطای 404</p><h1>این صفحه پیدا نشد.</h1><p class="page-lead">ممکن است نشانی تغییر کرده باشد یا صفحه‌ای که به دنبال آن هستید وجود نداشته باشد.</p><div class="not-found__actions"><a class="contact__button" href="/">بازگشت به صفحه اصلی ↗</a><a class="outline-link" href="/html/projects.html">مشاهده پروژه‌ها</a></div></div></section>
 </main>
 <footer aria-label="پاورقی سایت" class="site-footer">
 <div class="container site-footer__main">
 <div class="site-footer__brand">
-<a aria-label="رادمهر گروپ، صفحه اصلی" class="site-footer__logo" href="/html/index.html#home"><img alt="رادمهر گروپ" decoding="async" height="67" loading="lazy" src="/images/radmehr-logo-horizontal-light.svg" width="260"/></a>
+<a aria-label="رادمهر گروپ، صفحه اصلی" class="site-footer__logo" href="/#home"><img alt="رادمهر گروپ" decoding="async" height="67" loading="lazy" src="/images/radmehr-logo-horizontal-light.svg" width="260"/></a>
 <p>معماری با نگاهی دقیق به نور، متریال و کیفیت تجربه فضا؛ از ایده تا فضایی ماندگار.</p>
 </div>
-<div class="site-footer__column"><h2>دسترسی سریع</h2><a href="/html/index.html#home">صفحه اصلی</a><a href="/html/about.html">درباره ما</a><a href="/html/services.html">خدمات</a><a href="/html/projects.html">پروژه‌ها</a><a href="/html/contact.html">تماس با ما</a></div>
+<div class="site-footer__column"><h2>دسترسی سریع</h2><a href="/#home">صفحه اصلی</a><a href="/html/about.html">درباره ما</a><a href="/html/services.html">خدمات</a><a href="/html/projects.html">پروژه‌ها</a><a href="/html/contact.html">تماس با ما</a></div>
 <div class="site-footer__column"><h2>حوزه‌های فعالیت</h2><a href="/html/services.html#architecture">طراحی معماری</a><a href="/html/services.html#interior">طراحی داخلی</a><a href="/html/services.html#facade">طراحی نما</a><a href="/html/services.html#construction">ساخت و اجرا</a><a href="/html/services.html#landscape">طراحی محوطه</a></div>
 <div class="site-footer__contact"><p class="site-footer__eyebrow">گام بعدی از اینجا شروع می‌شود</p><h2>ایده‌ای برای فضای بعدی‌تان دارید؟</h2><p>برای مطرح‌کردن پرسش یا درخواست مشاوره، از صفحه تماس استفاده کنید.</p><a class="site-footer__cta" href="/html/contact.html">شروع گفت‌وگو <span aria-hidden="true">↗</span></a></div>
 </div>
