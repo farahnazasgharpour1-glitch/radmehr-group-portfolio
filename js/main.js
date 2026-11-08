@@ -210,8 +210,10 @@ projectCards.forEach((card) => {
 
     // Same calm constant-speed GSAP marquee as the earlier project version.
     const speed = window.matchMedia("(max-width: 760px)").matches ? 32 : 40;
+    // Start on the duplicate cycle and move toward the original cards (left to right).
+    gsap.set(track, { x: -cycleDistance });
     animation = gsap.to(track, {
-      x: -cycleDistance,
+      x: 0,
       duration: cycleDistance / speed,
       ease: "none",
       repeat: -1,
