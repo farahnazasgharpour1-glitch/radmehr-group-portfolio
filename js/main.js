@@ -97,15 +97,21 @@ projectCards.forEach((card) => {
   });
 });
 
-// Native horizontal gallery with automatic progression and clear pause controls.
+// Continuous, seamless project gallery using the locally hosted GSAP core.
 (() => {
-  const viewport = document.querySelector(".project-showcase__viewport");
-  if (!viewport) return;
+  const gsap = window.gsap;
+  const section = document.querySelector(".project-showcase");
+  if (!gsap || !section) return;
 
-  const track = viewport.querySelector(".project-showcase__track");
-  const panels = track ? Array.from(track.querySelectorAll(".showcase-panel")) : [];
-  const toggle = document.querySelector(".project-showcase__autoplay-toggle");
-  if (panels.length < 2) {
+  const viewport = section.querySelector(".project-showcase__viewport");
+  const track = section.querySelector(".project-showcase__track");
+  const toggle = section.querySelector(".project-showcase__autoplay-toggle");
+  if (!viewport || !track) return;
+
+  const originalPanels = Array.from(track.children).filter(
+    (panel) => !panel.hasAttribute("data-marquee-clone")
+  );
+  if (originalPanels.length < 2) {
     if (toggle) toggle.hidden = true;
     return;
   }
@@ -113,120 +119,164 @@ projectCards.forEach((card) => {
   const motionQuery = window.matchMedia
     ? window.matchMedia("(prefers-reduced-motion: reduce)")
     : null;
-  const reducedMotion = !!(motionQuery && motionQuery.matches);
-  let userPaused = reducedMotion;
-  let pointerPaused = false;
-  let focusPaused = false;
-  let userStartedMotion = false;
 
-  function isPaused() {
-    return userPaused || pointerPaused || focusPaused || document.hidden;
-  }
+  let reduceMotion = Boolean(motionQuery && motionQuery.matches);
+  let userPaused = reduceMotion;
+  let userHasInteracted = false;
+  let isVisible = false;
+  let clones = [];
+  let animation = null;
+  let observer = null;
+  let resizeFrame = 0;
 
   function updateToggle() {
     if (!toggle) return;
-    const paused = isPaused();
+    toggle.hidden = false;
     toggle.setAttribute("aria-pressed", String(userPaused));
-    toggle.setAttribute("aria-label", paused
-      ? "ادامه حرکت خودکار گالری"
-      : "توقف حرکت خودکار گالری");
-    toggle.textContent = paused ? "ادامه حرکت گالری" : "توقف حرکت گالری";
-  }
-
-  function nearestPanelIndex() {
-    const viewportLeft = viewport.getBoundingClientRect().left;
-    let bestIndex = 0;
-    let bestDistance = Infinity;
-
-    panels.forEach((panel, index) => {
-      const distance = Math.abs(panel.getBoundingClientRect().left - viewportLeft);
-      if (distance < bestDistance) {
-        bestDistance = distance;
-        bestIndex = index;
-      }
-    });
-
-    return bestIndex;
-  }
-
-  function advanceGallery() {
-    if (isPaused()) return;
-
-    const current = nearestPanelIndex();
-    const nextIndex = (current + 1) % panels.length;
-    const target = panels[nextIndex];
-    const left = Math.max(
-      0,
-      viewport.scrollLeft + target.getBoundingClientRect().left -
-        viewport.getBoundingClientRect().left
+    toggle.setAttribute(
+      "aria-label",
+      userPaused ? "ادامه حرکت خودکار گالری" : "توقف حرکت خودکار گالری"
     );
+    toggle.textContent = userPaused
+      ? "ادامه حرکت گالری"
+      : "توقف حرکت گالری";
+  }
 
-    viewport.scrollTo({
-      left,
-      behavior: reducedMotion && !userStartedMotion ? "auto" : "smooth"
+  function updatePlayback() {
+    if (!animation) return;
+    const shouldPlay =
+      isVisible &&
+      !userPaused &&
+      !document.hidden &&
+      (!reduceMotion || userHasInteracted);
+
+    if (shouldPlay) animation.play();
+    else animation.pause();
+  }
+
+  function clearClones() {
+    clones.forEach((clone) => clone.remove());
+    clones = [];
+  }
+
+  function createClone(panel) {
+    const clone = panel.cloneNode(true);
+    clone.setAttribute("aria-hidden", "true");
+    clone.setAttribute("inert", "");
+    clone.setAttribute("data-marquee-clone", "");
+    clone.inert = true;
+
+    clone.querySelectorAll("img").forEach((image) => {
+      image.setAttribute("alt", "");
     });
+    clone.querySelectorAll("[id]").forEach((element) => {
+      element.removeAttribute("id");
+    });
+    return clone;
+  }
+
+  function buildAnimation() {
+    if (animation) {
+      animation.kill();
+      animation = null;
+    }
+
+    clearClones();
+    section.classList.remove("is-enhanced");
+    gsap.set(track, { x: 0 });
+
+    const styles = window.getComputedStyle(track);
+    const gap =
+      parseFloat(styles.columnGap) ||
+      parseFloat(styles.gap) ||
+      0;
+
+    const panelsWidth = originalPanels.reduce(
+      (total, panel) => total + panel.getBoundingClientRect().width,
+      0
+    );
+    const cycleDistance = panelsWidth + gap * originalPanels.length;
+
+    if (cycleDistance <= viewport.clientWidth + 1) {
+      if (toggle) toggle.hidden = true;
+      return;
+    }
+
+    clones = originalPanels.map(createClone);
+    clones.forEach((clone) => track.appendChild(clone));
+
+    section.classList.add("is-enhanced");
+    if (toggle) toggle.hidden = false;
+
+    // Same calm constant-speed GSAP marquee as the earlier project version.
+    const speed = window.matchMedia("(max-width: 760px)").matches ? 32 : 40;
+    animation = gsap.to(track, {
+      x: -cycleDistance,
+      duration: cycleDistance / speed,
+      ease: "none",
+      repeat: -1,
+      paused: true,
+      force3D: true
+    });
+
+    updateToggle();
+    updatePlayback();
   }
 
   if (toggle) {
-    toggle.hidden = false;
     toggle.addEventListener("click", () => {
+      userHasInteracted = true;
       userPaused = !userPaused;
-      if (!userPaused) userStartedMotion = true;
       updateToggle();
+      updatePlayback();
     });
   }
 
-  viewport.addEventListener("mouseenter", () => {
-    pointerPaused = true;
-    updateToggle();
-  });
-  viewport.addEventListener("mouseleave", () => {
-    pointerPaused = false;
-    updateToggle();
-  });
-  viewport.addEventListener("focusin", () => {
-    focusPaused = true;
-    updateToggle();
-  });
-  viewport.addEventListener("focusout", (event) => {
-    focusPaused = viewport.contains(event.relatedTarget);
-    updateToggle();
-  });
-  viewport.addEventListener("touchstart", () => {
-    userPaused = true;
-    updateToggle();
-  }, { passive: true });
-
-  viewport.addEventListener("keydown", (event) => {
-    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-    event.preventDefault();
-    userPaused = true;
-    updateToggle();
-
-    const direction = event.key === "ArrowRight" ? 1 : -1;
-    const step = Math.max(180, viewport.clientWidth * 0.65);
-    const reduceNow = motionQuery && motionQuery.matches;
-    viewport.scrollBy({
-      left: direction * step,
-      behavior: reduceNow && !userStartedMotion ? "auto" : "smooth"
-    });
-  });
-
-  if (motionQuery && typeof motionQuery.addEventListener === "function") {
-    motionQuery.addEventListener("change", (event) => {
-      if (event.matches && !userStartedMotion) userPaused = true;
-      updateToggle();
-    });
-  } else if (motionQuery && typeof motionQuery.addListener === "function") {
-    motionQuery.addListener((event) => {
-      if (event.matches && !userStartedMotion) userPaused = true;
-      updateToggle();
-    });
+  if ("IntersectionObserver" in window) {
+    observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries.some((entry) => entry.isIntersecting);
+        updatePlayback();
+      },
+      { threshold: 0.01 }
+    );
+    observer.observe(section);
+  } else {
+    isVisible = true;
   }
 
-  document.addEventListener("visibilitychange", updateToggle);
+  const onVisibilityChange = () => updatePlayback();
+  document.addEventListener("visibilitychange", onVisibilityChange);
+
+  const onResize = () => {
+    window.cancelAnimationFrame(resizeFrame);
+    resizeFrame = window.requestAnimationFrame(buildAnimation);
+  };
+  window.addEventListener("resize", onResize, { passive: true });
+
+  if (motionQuery) {
+    const onMotionChange = (event) => {
+      reduceMotion = event.matches;
+      if (reduceMotion && !userHasInteracted) userPaused = true;
+      if (!reduceMotion && !userHasInteracted) userPaused = false;
+      updateToggle();
+      updatePlayback();
+    };
+    if (typeof motionQuery.addEventListener === "function") {
+      motionQuery.addEventListener("change", onMotionChange);
+    } else if (typeof motionQuery.addListener === "function") {
+      motionQuery.addListener(onMotionChange);
+    }
+  }
+
+  viewport.setAttribute(
+    "aria-label",
+    "گالری سه تصویر معماری با حرکت خودکار؛ برای توقف یا ادامه از دکمه کنترل استفاده کنید"
+  );
+
+  buildAnimation();
   updateToggle();
-  window.setInterval(advanceGallery, 6200);
+  updatePlayback();
 })();
 
 // Responsive navigation, independent of all third-party libraries.
